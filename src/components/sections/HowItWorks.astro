@@ -1,0 +1,88 @@
+---
+import Container from "../common/Container.astro";
+
+// How it works steps
+const steps = [
+  {
+    number: "01",
+    title: "Create your digital profile",
+    description: "Set up your customized digital business card with your contact information, social links, and personal branding."
+  },
+  {
+    number: "02",
+    title: "Share your profile instantly",
+    description: "Connect with anyone via NFC tap, QR code, or shareable link. No more forgetting business cards or manual data entry."
+  },
+  {
+    number: "03",
+    title: "Organize your contacts",
+    description: "All connections are automatically organized in your personal CRM, with context about where and when you met."
+  },
+  {
+    number: "04",
+    title: "Leverage network intelligence",
+    description: "Our AI analyzes your network to identify valuable connections and recommend strategic introductions."
+  }
+];
+---
+
+<section class="py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
+  <Container>
+    <!-- Section header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        How LinkMe Works
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300">
+        A simple yet powerful system to transform how you connect and grow your professional network.
+      </p>
+    </div>
+    
+    <!-- Steps with app screenshots -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <!-- Steps -->
+      <div class="space-y-12">
+        {steps.map((step) => (
+          <div class="flex">
+            <div class="flex-shrink-0 mr-6">
+              <div class="w-12 h-12 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-lg font-bold text-indigo-600 dark:text-indigo-400">
+                {step.number}
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                {step.title}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                {step.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <!-- App screenshot with device frame -->
+      <div class="relative mx-auto lg:mx-0 max-w-sm lg:max-w-none">
+        <!-- Phone frame -->
+        <div class="relative z-10 rounded-[3rem] overflow-hidden shadow-xl bg-gray-900 p-2">
+          <img 
+            src="/images/screenshots/app-workflow.png" 
+            alt="LinkMe App Workflow" 
+            class="w-full h-auto rounded-[2.5rem] border border-gray-800"
+            width="375"
+            height="812"
+          />
+          
+          <!-- Status bar details to make it look realistic -->
+          <div class="absolute top-0 inset-x-0 h-6 bg-black rounded-t-[2.5rem] flex items-center justify-between px-6">
+            <div class="w-12 h-1 bg-gray-800 rounded-full"></div>
+          </div>
+        </div>
+        
+        <!-- Decorative elements -->
+        <div class="absolute -bottom-6 -right-6 w-64 h-64 bg-indigo-500 bg-opacity-20 rounded-full filter blur-3xl"></div>
+        <div class="absolute -top-6 -left-6 w-40 h-40 bg-indigo-500 bg-opacity-20 rounded-full filter blur-2xl"></div>
+      </div>
+    </div>
+  </Container>
+</section>

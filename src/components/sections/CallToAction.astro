@@ -1,0 +1,58 @@
+---
+import Container from "../common/Container.astro";
+import Button from "../common/Button.astro";
+---
+
+<section class="py-16 md:py-24 bg-indigo-600 dark:bg-indigo-900 relative overflow-hidden">
+  <!-- Decorative elements -->
+  <div class="absolute top-0 left-0 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+  <div class="absolute bottom-0 right-0 w-96 h-96 bg-indigo-700 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+  
+  <Container>
+    <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-8 md:gap-12">
+      <div class="md:max-w-lg">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Ready to transform how you network?
+        </h2>
+        <p class="text-indigo-100 text-lg mb-8 md:mb-0">
+          Download the LinkMe app today and start building meaningful connections that can help you achieve your goals.
+        </p>
+      </div>
+      
+      <div class="flex flex-col sm:flex-row gap-4">
+        <Button href="/signup" variant="secondary" size="lg">
+          Sign Up on Web
+        </Button>
+        <Button href="https://apps.apple.com/app/linkme" variant="secondary" size="lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z" />
+          </svg>
+          Download iOS App
+        </Button>
+      </div>
+    </div>
+    
+    <!-- App features summary -->
+    <div class="relative z-10 mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg backdrop-blur-sm">
+        <div class="text-white text-lg font-bold mb-2">Digital Business Card</div>
+        <p class="text-indigo-100">Share your profile with anyone instantly via NFC, QR code, or link.</p>
+      </div>
+      
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg backdrop-blur-sm">
+        <div class="text-white text-lg font-bold mb-2">Contact Management</div>
+        <p class="text-indigo-100">Organize your connections with powerful tagging and filtering.</p>
+      </div>
+      
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg backdrop-blur-sm">
+        <div class="text-white text-lg font-bold mb-2">AI-Powered Insights</div>
+        <p class="text-indigo-100">Get smart recommendations for networking opportunities.</p>
+      </div>
+      
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg backdrop-blur-sm">
+        <div class="text-white text-lg font-bold mb-2">Marketing Automation</div>
+        <p class="text-indigo-100">Schedule follow-ups and nurture your professional relationships.</p>
+      </div>
+    </div>
+  </Container>
+</section>

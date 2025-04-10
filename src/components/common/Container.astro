@@ -1,0 +1,19 @@
+---
+    export interface Props {
+    narrow?: boolean;
+    as?: string;
+    class?: string;
+    }
+
+    const { 
+    narrow = false, 
+    as: Element = "div",
+    class: className = ""
+    } = Astro.props;
+
+    const width = narrow ? "max-w-4xl" : "max-w-7xl";
+---
+
+<Element class={`mx-auto px-4 sm:px-6 lg:px-8 ${width} ${className}`}>
+  <slot />
+</Element>

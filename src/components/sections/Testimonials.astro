@@ -1,0 +1,77 @@
+---
+import Container from "../common/Container.astro";
+
+// Testimonial data
+const testimonials = [
+  {
+    content: "LinkMe has completely transformed how I manage my professional connections. The AI recommendations have helped me reconnect with valuable contacts at just the right time, leading to several new business opportunities.",
+    author: "Sarah Johnson",
+    title: "Marketing Director",
+    avatar: "/images/testimonials/avatar-1.jpg"
+  },
+  {
+    content: "As someone who attends multiple networking events each month, LinkMe has become an essential tool. No more stacks of business cards or forgotten follow-ups. Everything is organized, and the automation features save me hours every week.",
+    author: "Michael Chen",
+    title: "Startup Founder",
+    avatar: "/images/testimonials/avatar-2.jpg"
+  },
+  {
+    content: "The digital business card feature alone is worth it, but the CRM capabilities take LinkMe to another level. I can finally keep track of all my professional relationships in one place with context about how we met and our conversations.",
+    author: "Priya Patel",
+    title: "Sales Executive",
+    avatar: "/images/testimonials/avatar-3.jpg"
+  }
+];
+---
+
+<section class="py-16 md:py-24 bg-white dark:bg-gray-900">
+  <Container>
+    <!-- Section header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        What Our Users Say
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300">
+        Join thousands of professionals who are leveraging LinkMe to build stronger networks.
+      </p>
+    </div>
+    
+    <!-- Testimonials grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {testimonials.map((testimonial) => (
+        <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-lg border border-gray-100 dark:border-gray-700 relative">
+          <!-- Quote icon -->
+          <div class="absolute top-6 right-6 text-indigo-100 dark:text-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10 5a1 1 0 011 1v2a1 1 0 01-1 1v2a1 1 0 01-1 1H8a1 1 0 01-1-1V8a1 1 0 011-1V5a1 1 0 011-1h1zM15 5a1 1 0 011 1v2a1 1 0 01-1 1v2a1 1 0 01-1 1h-1a1 1 0 01-1-1V8a1 1 0 011-1V5a1 1 0 011-1h1z" />
+            </svg>
+          </div>
+          
+          <!-- Testimonial content -->
+          <p class="text-gray-600 dark:text-gray-300 mb-8 relative z-10">
+            "{testimonial.content}"
+          </p>
+          
+          <!-- Author info -->
+          <div class="flex items-center">
+            <img 
+              src={testimonial.avatar} 
+              alt={testimonial.author} 
+              class="w-12 h-12 rounded-full mr-4 object-cover"
+              width="48"
+              height="48"
+            />
+            <div>
+              <h4 class="font-medium text-gray-900 dark:text-white">
+                {testimonial.author}
+              </h4>
+              <p class="text-sm text-gray-500 dark:text-gray-400">
+                {testimonial.title}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

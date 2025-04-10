@@ -1,0 +1,131 @@
+---
+import Container from "../common/Container.astro";
+import Button from "../common/Button.astro";
+
+// Pricing data
+const pricingPlans = [
+  {
+    name: "Free",
+    price: "$0",
+    description: "Perfect for individuals just starting to build their network.",
+    features: [
+      "Basic digital business card",
+      "Up to 100 connections",
+      "NFC & QR code sharing",
+      "Basic contact management",
+      "Mobile app access"
+    ],
+    cta: "Get Started",
+    ctaLink: "/signup",
+    highlighted: false
+  },
+  {
+    name: "Pro",
+    price: "$9.99",
+    period: "/month",
+    description: "For professionals actively growing their network.",
+    features: [
+      "Advanced digital business card",
+      "Unlimited connections",
+      "Custom branding",
+      "Advanced contact management",
+      "Basic AI network insights",
+      "Marketing automation",
+      "Email & priority support"
+    ],
+    cta: "Get Started",
+    ctaLink: "/signup-pro",
+    highlighted: true
+  },
+  {
+    name: "Business",
+    price: "$29.99",
+    period: "/month",
+    description: "For teams and businesses managing multiple relationships.",
+    features: [
+      "Everything in Pro, plus:",
+      "Team collaboration features",
+      "Advanced AI network intelligence",
+      "CRM integrations",
+      "Advanced analytics & reports",
+      "API access",
+      "Dedicated support"
+    ],
+    cta: "Contact Sales",
+    ctaLink: "/contact-sales",
+    highlighted: false
+  }
+];
+---
+
+<section class="py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
+  <Container>
+    <!-- Section header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Simple, Transparent Pricing
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300">
+        Choose the plan that's right for you and start building meaningful connections.
+      </p>
+    </div>
+    
+    <!-- Pricing cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {pricingPlans.map((plan) => (
+        <div class={`
+          rounded-lg p-8 transition-all duration-300
+          ${plan.highlighted 
+            ? 'bg-white dark:bg-gray-900 shadow-xl border-2 border-indigo-500 dark:border-indigo-400 relative' 
+            : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700'
+          }
+        `}>
+          {plan.highlighted && (
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600 text-white text-xs px-3 py-1 rounded-full font-medium">
+              Most Popular
+            </div>
+          )}
+          
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            {plan.name}
+          </h3>
+          
+          <div class="mb-6">
+            <span class="text-4xl font-bold text-gray-900 dark:text-white">{plan.price}</span>
+            {plan.period && <span class="text-gray-500 dark:text-gray-400">{plan.period}</span>}
+          </div>
+          
+          <p class="text-gray-600 dark:text-gray-300 mb-6">
+            {plan.description}
+          </p>
+          
+          <ul class="space-y-3 mb-8">
+            {plan.features.map((feature) => (
+              <li class="flex items-start">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500 dark:text-indigo-400 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-gray-600 dark:text-gray-300">{feature}</span>
+              </li>
+            ))}
+          </ul>
+          
+          <Button 
+            href={plan.ctaLink} 
+            variant={plan.highlighted ? "primary" : "outline"} 
+            class="w-full"
+          >
+            {plan.cta}
+          </Button>
+        </div>
+      ))}
+    </div>
+    
+    <!-- FAQ link -->
+    <div class="text-center mt-12">
+      <p class="text-gray-600 dark:text-gray-300">
+        Have questions about our pricing? <a href="/faq" class="text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 font-medium">Check out our FAQ</a> or <a href="/contact" class="text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 font-medium">contact us</a>.
+      </p>
+    </div>
+  </Container>
+</section>

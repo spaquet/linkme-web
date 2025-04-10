@@ -1,0 +1,134 @@
+---
+// Import the core SEO component
+import { SEO } from "astro-seo";
+
+// Define the props interface for our custom SEO component
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: URL | string;
+  type?: "website" | "article";
+  publishedDate?: Date;
+  ogTitle?: string;
+  ogDescription?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+}
+
+// Destructure the props with default values
+const {
+  title = "LinkMe - Connect, Track & Grow Your Network",
+  description = "Make connections, track your network, extend your reach, and automate marketing tasks with LinkMe.",
+  image = "/images/social-preview.jpg",
+  canonicalURL = Astro.url,
+  type = "website",
+  publishedDate,
+  ogTitle,
+  ogDescription,
+  twitterTitle,
+  twitterDescription,
+  noindex = false,
+  nofollow = false,
+} = Astro.props;
+
+// Construct absolute URL for the OG image
+const siteUrl = Astro.site ? Astro.site.href : "/";
+const ogImageUrl = new URL(image, siteUrl).href;
+
+// Format date for schema if available
+const datePublished = publishedDate ? publishedDate.toISOString() : null;
+
+// Social media titles and descriptions, falling back to main title and description
+const openGraphTitle = ogTitle || title;
+const openGraphDescription = ogDescription || description;
+const twitterCardTitle = twitterTitle || title;
+const twitterCardDescription = twitterDescription || description;
+
+// Create JSON-LD schema for rich snippets
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "LinkMe",
+  "url": siteUrl,
+  "description": description,
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": `${siteUrl}search?q={search_term_string}`,
+    "query-input": "required name=search_term_string"
+  }
+};
+
+// Add SoftwareApplication schema for the app
+const appSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "LinkMe",
+  "operatingSystem": "iOS",
+  "applicationCategory": "BusinessApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "524"
+  }
+};
+
+// Combine schemas into an array
+const schemas = [websiteSchema, appSchema];
+---
+
+<!-- Use the astro-seo component with our enhanced properties -->
+<SEO
+  title={title}
+  description={description}
+  canonical={canonicalURL}
+  openGraph={{
+    basic: {
+      title: openGraphTitle,
+      type: type,
+      image: ogImageUrl,
+    },
+    optional: {
+      siteName: "LinkMe",
+      description: openGraphDescription,
+    },
+    article: type === "article" && datePublished ? {
+      publishedTime: datePublished,
+      authors: ["LinkMe Team"],
+    } : undefined,
+  }}
+  twitter={{
+    card: "summary_large_image",
+    site: "@LinkMeApp",
+    creator: "@LinkMeApp",
+    title: twitterCardTitle,
+    description: twitterCardDescription,
+    image: ogImageUrl,
+  }}
+  noindex={noindex}
+  nofollow={nofollow}
+  extend={{
+    // Extended meta tags
+    link: [
+      { rel: "icon", href: "/favicons/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicons/favicon.ico", sizes: "any" },
+      { rel: "apple-touch-icon", href: "/favicons/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
+    ],
+    meta: [
+      { name: "theme-color", content: "#4f46e5" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "black" },
+    ],
+  }}
+/>
+
+<!-- Add structured data for rich results -->
+<script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
