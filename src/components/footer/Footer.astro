@@ -1,59 +1,58 @@
 ---
-    import Container from "../common/Container.astro";
+import Container from "../common/Container.astro";
 
-    // Define footer links
-    const footerLinks = [
-    {
-        title: "Product",
-        links: [
-        { text: "Features", href: "/features" },
-        { text: "Pricing", href: "/pricing" },
-        { text: "Download", href: "https://apps.apple.com/app/linkme" },
-        { text: "Web App", href: "/signup" },
-        ]
-    },
-    {
-        title: "Company",
-        links: [
-        { text: "About", href: "/about" },
-        { text: "Careers", href: "/careers" },
-        { text: "Blog", href: "/blog" },
-        { text: "Press", href: "/press" },
-        ]
-    },
-    {
-        title: "Resources",
-        links: [
-        { text: "Support", href: "/support" },
-        { text: "Documentation", href: "/docs" },
-        { text: "Contact", href: "/contact" },
-        { text: "Privacy Policy", href: "/privacy" },
-        ]
-    },
-    {
-        title: "Connect",
-        links: [
-        { text: "Twitter", href: "https://twitter.com/linkmeapp" },
-        { text: "LinkedIn", href: "https://linkedin.com/company/linkmeapp" },
-        { text: "Instagram", href: "https://instagram.com/linkmeapp" },
-        { text: "Facebook", href: "https://facebook.com/linkmeapp" },
-        ]
-    }
-    ];
+// Define footer links
+const footerLinks = [
+  {
+    title: "Product",
+    links: [
+      { text: "Features", href: "/features" },
+      { text: "Pricing", href: "/pricing" },
+      { text: "Download", href: "https://apps.apple.com/app/linkme" },
+      { text: "Web App", href: "/signup" },
+    ]
+  },
+  {
+    title: "Company",
+    links: [
+      { text: "About", href: "/about" },
+      { text: "Careers", href: "/careers" },
+      { text: "Blog", href: "/blog" },
+      { text: "Press", href: "/press" },
+    ]
+  },
+  {
+    title: "Resources",
+    links: [
+      { text: "Support", href: "/support" },
+      { text: "Documentation", href: "/docs" },
+      { text: "Contact", href: "/contact" },
+      { text: "Privacy Policy", href: "/privacy" },
+    ]
+  },
+  {
+    title: "Connect",
+    links: [
+      { text: "Twitter", href: "https://twitter.com/linkmeapp" },
+      { text: "LinkedIn", href: "https://linkedin.com/company/linkmeapp" },
+      { text: "Instagram", href: "https://instagram.com/linkmeapp" },
+      { text: "Facebook", href: "https://facebook.com/linkmeapp" },
+    ]
+  }
+];
 
-    const currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-gray-50 dark:bg-gray-800 py-12">
+<footer class="bg-gradient-to-b from-[#1E1E1E] to-[#121212] py-12">
   <Container>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
       <!-- Logo & Description -->
       <div class="lg:col-span-1">
         <div class="flex items-center mb-4">
           <img src="/images/logos/linkme-logo.svg" alt="LinkMe Logo" class="h-8 w-auto" />
-          <span class="ml-2 text-xl font-bold text-indigo-600 dark:text-indigo-400">LinkMe</span>
         </div>
-        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+        <p class="text-gray-200 text-sm mb-4">
           Connect, track, and grow your network with smart tools and AI-powered insights.
         </p>
         <!-- App Store badge -->
@@ -65,13 +64,13 @@
       <!-- Footer Links -->
       {footerLinks.map((column) => (
         <div>
-          <h3 class="font-semibold text-gray-900 dark:text-white mb-4">{column.title}</h3>
+          <h3 class="font-semibold text-white mb-4">{column.title}</h3>
           <ul class="space-y-3">
             {column.links.map((link) => (
               <li>
                 <a 
                   href={link.href} 
-                  class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 text-sm"
+                  class="text-white hover:text-indigo-300 text-sm"
                 >
                   {link.text}
                 </a>
@@ -83,18 +82,18 @@
     </div>
     
     <!-- Copyright & Legal -->
-    <div class="border-t border-gray-200 dark:border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-      <p class="text-gray-600 dark:text-gray-400 text-sm">
+    <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-white text-sm">
         &copy; {currentYear} LinkMe. All rights reserved.
       </p>
       <div class="flex space-x-6 mt-4 md:mt-0">
-        <a href="/terms" class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 text-sm">
+        <a href="/terms" class="text-white hover:text-indigo-300 text-sm">
           Terms of Service
         </a>
-        <a href="/privacy" class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 text-sm">
+        <a href="/privacy" class="text-white hover:text-indigo-300 text-sm">
           Privacy Policy
         </a>
-        <a href="/cookies" class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 text-sm">
+        <a href="/cookies" class="text-white hover:text-indigo-300 text-sm">
           Cookie Policy
         </a>
       </div>

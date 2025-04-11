@@ -1,18 +1,18 @@
 ---
-    // Define the props
-    export interface Props {
-    isMobile?: boolean;
-    }
+// Define the props
+export interface Props {
+  isMobile?: boolean;
+}
 
-    // Define navigation items
-    const navItems = [
-    { text: "Features", href: "/features" },
-    { text: "Pricing", href: "/pricing" },
-    { text: "About", href: "/about" },
-    { text: "Support", href: "/support" },
-    ];
+// Define navigation items
+const navItems = [
+  { text: "Features", href: "/features" },
+  { text: "Pricing", href: "/pricing" },
+  { text: "About", href: "/about" },
+  { text: "Support", href: "/support" },
+];
 
-    const { isMobile = false } = Astro.props;
+const { isMobile = false } = Astro.props;
 ---
 
 <nav class={isMobile ? "flex flex-col space-y-2" : "flex items-center space-x-8"}>
@@ -23,8 +23,8 @@
         class={`
           font-medium transition-colors duration-200
           ${isMobile 
-            ? "block py-2 text-gray-700 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400" 
-            : "text-sm text-gray-700 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
+            ? "block py-2 text-white hover:text-indigo-300" 
+            : "text-sm text-white hover:text-indigo-300"
           }
         `}
       >

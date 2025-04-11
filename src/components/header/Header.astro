@@ -4,14 +4,13 @@ import Navigation from "./Navigation.astro";
 import Button from "../common/Button.astro";
 ---
 
-<header class="w-full py-4 border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 fixed top-0 z-40">
+<header class="w-full py-4 border-b border-gray-800 bg-[#1E1E1E] fixed top-0 z-40">
   <Container>
     <div class="flex items-center justify-between">
-      <!-- Logo -->
+      <!-- Logo only, no text next to it -->
       <div class="flex items-center">
         <a href="/" class="flex items-center">
           <img src="/images/logos/linkme-logo.svg" alt="LinkMe Logo" class="h-8 w-auto" />
-          <span class="ml-2 text-xl font-bold text-indigo-600 dark:text-indigo-400">LinkMe</span>
         </a>
       </div>
       
@@ -20,13 +19,13 @@ import Button from "../common/Button.astro";
         <Navigation />
       </div>
       
-      <!-- CTA Buttons -->
+      <!-- CTA Buttons - Updated to "Sign In" and "Get Started" -->
       <div class="hidden md:flex items-center space-x-4">
-        <a href="/signup" class="text-sm font-medium text-gray-700 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400">
-          Sign Up
+        <a href="/signin" class="text-sm font-medium text-white hover:text-indigo-300">
+          Sign In
         </a>
-        <Button href="https://apps.apple.com/app/linkme" variant="primary">
-          Download App
+        <Button href="/signup" variant="primary">
+          Get Started
         </Button>
       </div>
       
@@ -35,7 +34,7 @@ import Button from "../common/Button.astro";
         <button 
           type="button" 
           id="menu-toggle"
-          class="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none"
+          class="text-white hover:text-indigo-300 focus:outline-none"
           aria-label="Toggle navigation menu"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -49,12 +48,12 @@ import Button from "../common/Button.astro";
     <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
       <div class="flex flex-col space-y-4">
         <Navigation isMobile={true} />
-        <div class="flex flex-col space-y-2 pt-4 border-t border-gray-100 dark:border-gray-800">
-          <a href="/signup" class="text-gray-700 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 font-medium py-2">
-            Sign Up
+        <div class="flex flex-col space-y-2 pt-4 border-t border-gray-700">
+          <a href="/signin" class="text-white hover:text-indigo-300 font-medium py-2">
+            Sign In
           </a>
-          <a href="https://apps.apple.com/app/linkme" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg text-center">
-            Download App
+          <a href="/signup" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg text-center">
+            Get Started
           </a>
         </div>
       </div>
