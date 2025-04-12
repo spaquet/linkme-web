@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import robotsTxt from 'astro-robots-txt';
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,18 +19,6 @@ export default defineConfig({
       },
     },
   },
-  // Only use robots.txt integration
-  integrations: [
-    // Generate robots.txt with reference to sitemap
-    robotsTxt({
-      host: 'https://getlinkme.app',
-      sitemap: true,
-      policy: [
-        {
-          userAgent: '*',
-          allow: '/',
-        }
-      ]
-    }),
-  ],
+  // Remove all integrations and handle sitemap and robots.txt manually
+  integrations: [],
 });
