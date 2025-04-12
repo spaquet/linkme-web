@@ -1,18 +1,13 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://getlinkme.app',
   vite: {
-    plugins: [
-      // Keep your existing tailwind plugin
-      tailwindcss()
-    ],
-    // Additional performance optimizations
+    plugins: [tailwindcss()],
     build: {
       chunkSizeWarningLimit: 1000,
     },
@@ -25,19 +20,12 @@ export default defineConfig({
       },
     },
   },
-  // Additional integrations for SEO
+  // Only use robots.txt integration
   integrations: [
-    // Generate sitemap for SEO
-    sitemap({
-      changefreq: 'weekly',
-      priority: 0.7,
-      lastmod: new Date(),
-    }),
-    
-    // Generate robots.txt for SEO
+    // Generate robots.txt with reference to sitemap
     robotsTxt({
       host: 'https://getlinkme.app',
-      sitemap: true, 
+      sitemap: true,
       policy: [
         {
           userAgent: '*',

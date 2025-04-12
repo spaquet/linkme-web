@@ -47,40 +47,44 @@
     
     <!-- SEO Implementation using astro-seo -->
     <SEO
-      title={title}
-      description={description}
-      canonical={canonicalURL}
-      openGraph={{
-        basic: {
-          title: title,
-          type: pageType,
-          image: image,
-        },
-        optional: {
-          siteName: "LinkMe",
-          description: description,
-        },
-      }}
-      twitter={{
-        card: "summary_large_image",
-        site: "@LinkMeApp",
-        creator: "@LinkMeApp",
+    title={title}
+    description={description}
+    canonical={canonicalURL}
+    openGraph={{
+      basic: {
         title: title,
-        description: description,
+        type: pageType,
         image: image,
-      }}
-      extend={{
-        link: [
-          { rel: "icon", href: "/favicons/favicon.svg" },
-          { rel: "sitemap", href: "/sitemap-index.xml" },
-        ],
-        meta: [
-          { name: "theme-color", content: "#4f46e5" },
-          { name: "apple-mobile-web-app-capable", content: "yes" },
-          { name: "apple-mobile-web-app-status-bar-style", content: "black" },
-        ],
-      }}
-    />
+      },
+      optional: {
+        siteName: "LinkMe",
+        description: description,
+      },
+    }}
+    twitter={{
+      card: "summary_large_image",
+      site: "@LinkMeApp",
+      creator: "@LinkMeApp",
+      title: title,
+      description: description,
+      image: image,
+    }}
+    extend={{
+      link: [
+        { rel: "icon", href: "/favicons/favicon.svg" },
+        { rel: "sitemap", href: "/sitemap.xml" }, // Reference to our custom sitemap
+      ],
+      meta: [
+        { name: "theme-color", content: "#4f46e5" },
+        { name: "apple-mobile-web-app-capable", content: "yes" },
+        { name: "apple-mobile-web-app-status-bar-style", content: "black" },
+      ],
+    }}
+  />
+    <title>{title}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   </head>
   <body class="flex flex-col min-h-screen bg-white dark:bg-gray-900">
     <Header />
