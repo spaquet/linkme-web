@@ -2,7 +2,6 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import alpinejs from '@astrojs/alpinejs';
-import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://getlinkme.app',
@@ -13,7 +12,5 @@ export default defineConfig({
     ssr: { external: ['sharp'] },
     server: { fs: { allow: ['..'] } },
   },
-  integrations: [alpinejs(), sitemap({
-    filter: (page) => !page.includes('/blog/'), // Exclude blog routes from main sitemap
-  })],
+  integrations: [alpinejs()],
 });
