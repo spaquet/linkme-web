@@ -12,7 +12,15 @@ const title = "LinkMe - Connect, Track & Grow Your Network";
 const description = "LinkMe helps you build meaningful connections, organize your contacts, and leverage AI to understand who in your network can help you achieve your goals.";
 ---
 
-<Layout title={title} description={description}>
+<Layout 
+  title={title} 
+  description={description}
+  image="/images/social-preview.jpg"
+  canonicalURL={new URL("/", Astro.site)}
+  pageType="website"
+  publishedTime={undefined}
+  author="LinkMe"
+  tags={[]}>
   <Hero />
   <Features />
   <HowItWorks />

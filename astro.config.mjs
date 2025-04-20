@@ -8,7 +8,18 @@ export default defineConfig({
   output: 'static',
   vite: {
     plugins: [tailwindcss()],
-    build: { chunkSizeWarningLimit: 1000 },
+    build: {
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        },
+        mangle: true,
+      },
+      chunkSizeWarningLimit: 1000,
+      sourcemap: true,
+    },
     ssr: { external: ['sharp'] },
     server: { fs: { allow: ['..'] } },
   },

@@ -1,96 +1,140 @@
----                               
-	// Import the SEO component from astro-seo for better SEO handling
-	import { SEO } from "astro-seo";
-	import Header from "../components/header/Header.astro";
-	import Footer from "../components/footer/Footer.astro";
-	import '../styles/global.css' 
+---
+    // Import the SEO component from astro-seo for better SEO handling
+    import { SEO } from "astro-seo";
+    import Header from "../components/header/Header.astro";
+    import Footer from "../components/footer/Footer.astro";
+    import '../styles/global.css';
 
-	// Define the props interface for the Layout component
-	export interface Props {
-	title?: string;
-	description?: string;
-	image?: string;
-	canonicalURL?: URL | string;
-	pageType?: "website" | "article";
-	}
+    // Define the props interface for the Layout component
+    export interface Props {
+        title?: string;
+        description?: string;
+        image?: string;
+        canonicalURL?: URL | string;
+        pageType?: "website" | "article";
+        publishedTime?: string;
+        author?: string;
+        tags?: string[];
+        twitterHandle?: string; // For dynamic twitter:creator
+    }
 
-	// Destructure the props with default values
-	const {
-	title = "LinkMe - Connect, Track & Grow Your Network",
-	description = "Make connections, track your network, extend your reach, and automate marketing tasks with LinkMe.",
-	image = "/images/social-preview.jpg",
-	canonicalURL = Astro.url,
-	pageType = "website",
-	} = Astro.props; 
+    // Destructure the props with default values
+    const {
+        title = "LinkMe - Connect, Track & Grow Your Network",
+        description = "Make connections, track your network, extend your reach, and automate marketing tasks with LinkMe.",
+        image = "/images/social-preview.jpg",
+        canonicalURL = Astro.url,
+        pageType = "website",
+        publishedTime,
+        author = "LinkMe",
+        tags = [],
+        twitterHandle, // No default, provided by blog posts
+    } = Astro.props;
+
+    // Ensure absolute URL for image
+    const absoluteImage = Astro.site ? new URL(image, Astro.site).toString() : image;
+
+    // Ensure canonicalURL is a string with trailing slash
+    const canonicalUrlString = canonicalURL instanceof URL ? canonicalURL.toString() : canonicalURL;
+    const normalizedCanonicalURL = canonicalUrlString.endsWith('/') ? canonicalUrlString : `${canonicalUrlString}/`;
+
+    // Map author to Twitter handle, prioritize twitterHandle from frontmatter
+    const twitterCreator = twitterHandle || (author === "Jane Doe" ? "@JaneDoe" : "@LinkMeApp");
+
+    // JSON-LD for BlogPosting (only for blog posts)
+    const jsonLd = pageType === "article" && publishedTime ? {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": title,
+        "description": description,
+        "author": { "@type": "Person", "name": author },
+        "datePublished": publishedTime,
+        "image": absoluteImage,
+        "publisher": {
+            "@type": "Organization",
+            "name": "LinkMe",
+            "logo": Astro.site ? new URL("/images/logo.png", Astro.site).toString() : "/images/logo.png"
+        },
+        "url": normalizedCanonicalURL
+    } : null;
 ---
 
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S95BC3HD1G"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-S95BC3HD1G"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-S95BC3HD1G');
+        </script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content={Astro.generator} />
 
-      gtag('config', 'G-S95BC3HD1G');
-    </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
+        <!-- Favicons -->
+        <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+        <link rel="icon" type="image/png" href="/favicons/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png" />
 
-    
-    <!-- Favicons -->
-    <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
-    <link rel="icon" type="image/png" href="/favicons/favicon.png" />
-    <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png" />
-    
-    <!-- SEO Implementation using astro-seo -->
-    <SEO
-    title={title}
-    description={description}
-    canonical={canonicalURL}
-    openGraph={{
-      basic: {
-        title: title,
-        type: pageType,
-        image: image,
-      },
-      optional: {
-        siteName: "LinkMe",
-        description: description,
-      },
-    }}
-    twitter={{
-      card: "summary_large_image",
-      site: "@LinkMeApp",
-      creator: "@LinkMeApp",
-      title: title,
-      description: description,
-      image: image,
-    }}
-    extend={{
-      link: [
-        { rel: "icon", href: "/favicons/favicon.svg" },
-        { rel: "sitemap", href: "/sitemap.xml" }, // Reference to our custom sitemap
-      ],
-      meta: [
-        { name: "theme-color", content: "#4f46e5" },
-        { name: "apple-mobile-web-app-capable", content: "yes" },
-        { name: "apple-mobile-web-app-status-bar-style", content: "black" },
-      ],
-    }}
-  />
-    <title>{title}</title>
-    <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  </head>
-  <body class="flex flex-col min-h-screen bg-white dark:bg-gray-900">
-    <Header />
-    <main class="flex-grow">
-      <slot />
-    </main>
-    <Footer />
-  </body>
+        <!-- JSON-LD for blog posts -->
+        {jsonLd && (
+            <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        )}
+
+        <!-- SEO Implementation using astro-seo -->
+        <SEO
+            title={title}
+            description={description}
+            canonical={normalizedCanonicalURL}
+            openGraph={{
+                basic: {
+                    title: title,
+                    type: pageType,
+                    image: absoluteImage,
+                    url: normalizedCanonicalURL,
+                },
+                optional: {
+                    siteName: "LinkMe",
+                    description: description,
+                },
+                article: pageType === "article" ? {
+                    publishedTime: publishedTime,
+                    author: author,
+                    tags: tags,
+                } : undefined,
+            }}
+            twitter={{
+                card: "summary_large_image",
+                site: "@LinkMeApp",
+                creator: pageType === "article" ? twitterCreator : "@LinkMeApp",
+                title: title,
+                description: description,
+                image: absoluteImage,
+            }}
+            extend={{
+                link: [
+                    { rel: "icon", href: "/favicons/favicon.svg" },
+                    { rel: "sitemap", href: "/sitemap-index.xml" },
+                ],
+                meta: [
+                    { name: "theme-color", content: "#4f46e5" },
+                    { name: "apple-mobile-web-app-capable", content: "yes" },
+                    { name: "apple-mobile-web-app-status-bar-style", content: "black" },
+                ],
+            }}
+        />
+        <title>{title}</title>
+        <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="flex flex-col min-h-screen bg-white dark:bg-gray-900">
+        <Header />
+        <main class="flex-grow">
+            <slot />
+        </main>
+        <Footer />
+    </body>
 </html>
