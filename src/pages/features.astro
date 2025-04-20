@@ -1,0 +1,94 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/common/Container.astro";
+
+const pageTitle = "LinkMe Features";
+const pageDescription = "Discover the powerful features of LinkMe, the all-in-one networking platform for digital business cards, contact management, and relationship building.";
+
+const features = [
+  {
+    title: "Digital Business Card",
+    description: "Create and share a dynamic digital business card in seconds. Customize it with your photo, voice intro, and collaboration goals for authentic connections.",
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" /></svg>`,
+  },
+  {
+    title: "Smart Contact Management",
+    description: "Organize your network with powerful tagging, filtering, and contextual notes. Keep track of where you met each contact and what makes them unique.",
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>`,
+  },
+  {
+    title: "AI-Powered Networking",
+    description: "Leverage AI to get smart recommendations for introductions, collaborations, and follow-ups based on your network’s goals and interactions.",
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`,
+  },
+  {
+    title: "Automated Follow-Ups",
+    description: "Schedule personalized follow-up messages and campaigns to nurture your relationships, with AI nudges at key intervals (e.g., 3 days, 1 month).",
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>`,
+  },
+  {
+    title: "One-Click Sharing",
+    description: "Share your contact details instantly via QR codes, NFC taps, or direct links—no paper cards or manual exchanges needed.",
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>`,
+  },
+  {
+    title: "Analytics & Insights",
+    description: "Track engagement with your profile, analyze networking effectiveness, and gain insights to optimize your relationship-building strategies.",
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>`,
+  },
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <section class="py-16 md:py-24 bg-white dark:bg-gray-900">
+    <Container>
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          Powerful Features for Seamless Networking
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300 prose dark:prose-invert">
+          LinkMe combines cutting-edge tools to help you create, manage, and grow your professional network with ease. From digital business cards to AI-driven insights, discover how LinkMe transforms the way you connect.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        {features.map((feature) => (
+          <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+            <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-6">
+              <Fragment set:html={feature.icon} />
+            </div>
+            <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              {feature.title}
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300">
+              {feature.description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8">
+          Explore LinkMe in Action
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div class="bg-gray-200 dark:bg-gray-700 rounded-lg h-64 flex items-center justify-center">
+            <p class="text-gray-600 dark:text-gray-300">[Placeholder: App Screenshot - Digital Business Card Creation]</p>
+          </div>
+          <div class="bg-gray-200 dark:bg-gray-700 rounded-lg h-64 flex items-center justify-center">
+            <p class="text-gray-600 dark:text-gray-300">[Placeholder: App Screenshot - AI Recommendations]</p>
+          </div>
+          <div class="bg-gray-200 dark:bg-gray-700 rounded-lg h-64 flex items-center justify-center">
+            <p class="text-gray-600 dark:text-gray-300">[Placeholder: App Screenshot - Contact Sharing]</p>
+          </div>
+        </div>
+        <a
+          href="https://getlinkme.app"
+          class="inline-block px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 transition-colors"
+        >
+          Get Started with LinkMe
+        </a>
+      </div>
+    </Container>
+  </section>
+</Layout>

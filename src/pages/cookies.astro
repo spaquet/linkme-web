@@ -1,0 +1,116 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/common/Container.astro";
+
+const pageTitle = "Cookie Policy";
+const pageDescription = "Learn how LinkMe uses cookies on our marketing website and web application to enhance your experience.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+<section class="py-16 md:py-24 bg-white dark:bg-gray-900">
+  <Container>
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">
+        {pageTitle}
+      </h1>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+        At LinkMe, Inc. ("LinkMe," "we," "us," or "our"), we use cookies and similar technologies to enhance your experience on our marketing website (<a href="https://getlinkme.app" class="text-indigo-600 dark:text-indigo-400 hover:underline">getlinkme.app</a>) and our web application (<a href="https://getlinkme.io" class="text-indigo-600 dark:text-indigo-400 hover:underline">getlinkme.io</a> and <a href="https://app.getlinkme.io" class="text-indigo-600 dark:text-indigo-400 hover:underline">app.getlinkme.io</a>). This Cookie Policy explains what cookies are, how we use them, and your choices regarding their use. By using our websites, you consent to our use of cookies as described in this policy.
+      </p>
+
+      <div class="space-y-8">
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">1. What Are Cookies?</h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            Cookies are small text files placed on your device (e.g., computer, smartphone, or tablet) when you visit a website. They help websites remember your preferences, track usage, and provide personalized features. We may also use similar technologies, such as pixels or web beacons, for similar purposes.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">2. How We Use Cookies</h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            We use cookies on our marketing website and web application for different purposes, as outlined below:
+          </p>
+          <div class="space-y-4 mt-4">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">2.1 Marketing Website (<a href="https://getlinkme.app" class="text-indigo-600 dark:text-indigo-400 hover:underline">getlinkme.app</a>)</h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                On our marketing website, we use cookies to:
+                <ul class="list-disc pl-6 mt-2">
+                  <li><strong>Analytics:</strong> We use Google Analytics to collect anonymized data about how visitors interact with our website, such as page views, time spent on pages, and traffic sources. This helps us understand user behavior and improve our website’s content and performance.</li>
+                </ul>
+              </p>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">2.2 Web Application (<a href="https://getlinkme.io" class="text-indigo-600 dark:text-indigo-400 hover:underline">getlinkme.io</a> and <a href="https://app.getlinkme.io" class="text-indigo-600 dark:text-indigo-400 hover:underline">app.getlinkme.io</a>)</h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                On our web application, we use cookies to:
+                <ul class="list-disc pl-6 mt-2">
+                  <li><strong>Session Management:</strong> Cookies help us manage your login sessions, ensuring you remain authenticated and can access your account securely without needing to log in repeatedly.</li>
+                  <li><strong>Performance Monitoring and Improvement:</strong> We use cookies to monitor the performance of our web application, such as load times and error rates, to identify and fix issues that may affect your experience.</li>
+                  <li><strong>Usage Analytics:</strong> Cookies allow us to collect data on how you use the web application, such as which features you use most frequently or how you navigate the platform. This helps us enhance existing features and develop new services that add value for our customers.</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">3. Types of Cookies We Use</h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            We use the following types of cookies:
+            <ul class="list-disc pl-6 mt-2">
+              <li><strong>Essential Cookies:</strong> These cookies are necessary for the operation of our websites, such as enabling session management and secure login. You cannot opt out of these cookies as they are required for the websites to function.</li>
+              <li><strong>Analytics Cookies:</strong> These cookies, including those from Google Analytics, help us understand how users interact with our websites by collecting anonymized data on usage patterns.</li>
+              <li><strong>Performance Cookies:</strong> These cookies collect information about how our web application performs, helping us identify and resolve technical issues.</li>
+            </ul>
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">4. Third-Party Cookies</h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            Some cookies are set by third-party services we use:
+            <ul class="list-disc pl-6 mt-2">
+              <li><strong>Google Analytics:</strong> On our marketing website, Google Analytics sets cookies to track user interactions. Google may use this data in accordance with its own <a href="https://policies.google.com/privacy" class="text-indigo-600 dark:text-indigo-400 hover:underline">Privacy Policy</a>. You can learn more about Google Analytics cookies <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" class="text-indigo-600 dark:text-indigo-400 hover:underline">here</a>.</li>
+              <li><strong>Other Third Parties:</strong> If we integrate additional third-party tools (e.g., for performance monitoring or analytics on the web application), they may set cookies. We will update this policy to reflect any such changes.</li>
+            </ul>
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">5. Your Choices Regarding Cookies</h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            You have several options to manage cookies:
+            <ul class="list-disc pl-6 mt-2">
+              <li><strong>Browser Settings:</strong> Most web browsers allow you to block or delete cookies through their settings. Note that disabling essential cookies may prevent you from using certain features of our web application, such as logging in. For guidance, visit your browser’s help page (e.g., <a href="https://support.google.com/chrome/answer/95647" class="text-indigo-600 dark:text-indigo-400 hover:underline">Chrome</a>, <a href="https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer" class="text-indigo-600 dark:text-indigo-400 hover:underline">Firefox</a>, or <a href="https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac" class="text-indigo-600 dark:text-indigo-400 hover:underline">Safari</a>).</li>
+              <li><strong>Google Analytics Opt-Out:</strong> To prevent Google Analytics from tracking your activity on our marketing website, you can install the <a href="https://tools.google.com/dlpage/gaoptout" class="text-indigo-600 dark:text-indigo-400 hover:underline">Google Analytics Opt-Out Browser Add-On</a>.</li>
+              <li><strong>Cookie Consent:</strong> Depending on your location, we may display a cookie consent banner allowing you to accept or reject non-essential cookies. You can manage your preferences through this banner when it appears.</li>
+            </ul>
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">6. Data Protection and Cookies</h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            Cookies may collect personal information, such as your IP address or device identifiers. Our use of this information is governed by our <a href="/privacy" class="text-indigo-600 dark:text-indigo-400 hover:underline">Privacy Policy</a>. We implement reasonable security measures to protect cookie data, but no system is completely secure.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">7. Changes to This Cookie Policy</h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            We may update this Cookie Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of material changes via email or through our websites. Your continued use of our websites after such changes constitutes your acceptance of the updated policy.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">8. Contact Us</h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            If you have questions about this Cookie Policy or our use of cookies, please contact us at <a href="mailto:support@getlinkme.app" class="text-indigo-600 dark:text-indigo-400 hover:underline">support@getlinkme.app</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
+</Layout>

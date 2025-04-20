@@ -1,0 +1,114 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/common/Container.astro";
+
+const pageTitle = "Frequently Asked Questions";
+const pageDescription = "Find answers to common questions about LinkMe, the all-in-one networking platform for digital business cards and contact management.";
+
+const faqs = [
+  {
+    question: "What is LinkMe?",
+    answer: "LinkMe is a Software-as-a-Service (SaaS) platform that helps you connect with people you meet in real life or through professional exchanges (e.g., email, Slack). It offers digital business cards, contact management tools, and automation features to build and maintain meaningful professional relationships. LinkMe is available on the Apple App Store for iOS devices and as a web application at <a href='https://getlinkme.io' class='text-indigo-600 dark:text-indigo-400 hover:underline'>getlinkme.io</a> and <a href='https://app.getlinkme.io' class='text-indigo-600 dark:text-indigo-400 hover:underline'>app.getlinkme.io</a>."
+  },
+  {
+    question: "How does LinkMe differ from LinkedIn?",
+    answer: "Unlike LinkedIn, which can feel superficial, LinkMe focuses on authentic, meaningful connections. You can share curated details like a 15-second voice intro, a micro-story about a recent project, or a collaboration goal. LinkMe also offers seamless contact exchange via QR codes or NFC, contextual note-taking, and AI-driven follow-up suggestions to foster deeper relationships."
+  },
+  {
+    question: "What features are included in the free tier?",
+    answer: "The free tier of LinkMe includes basic digital business card creation, contact management with tagging and search, and one-click sharing via QR codes or links. Note that by using the free tier, you consent to LinkMe accessing your data to provide and improve the service, as outlined in our <a href='/privacy' class='text-indigo-600 dark:text-indigo-400 hover:underline'>Privacy Policy</a>."
+  },
+  {
+    question: "How much does LinkMe cost?",
+    answer: "LinkMe offers a free tier and premium subscription plans. As an early-stage company, our pricing and features may evolve. We’ll notify you of any changes via email or through the app. For the latest pricing details, visit our marketing website at <a href='https://getlinkme.app' class='text-indigo-600 dark:text-indigo-400 hover:underline'>getlinkme.app</a> or check your account settings."
+  },
+  {
+    question: "How do I share my digital business card?",
+    answer: "You can share your digital business card instantly using QR codes, NFC taps (on compatible devices), or direct links. Simply open the LinkMe app or web application, navigate to your profile, and select your preferred sharing method. Recipients can view your card and save your contact details without needing a LinkMe account."
+  },
+  {
+    question: "What are Smart Profiles and how do they work?",
+    answer: "Smart Profiles are dynamic digital business cards that evolve over time. You can add a 'Current Focus' section that auto-expires after 30 days, keeping your profile fresh. You can also include a voice intro, micro-story, or collaboration goal to make your profile more personal and engaging."
+  },
+  {
+    question: "Can I integrate LinkMe with other tools like Slack or CRM systems?",
+    answer: "Yes, LinkMe supports integrations with platforms like Slack, email, and certain CRM systems to streamline your networking. For example, you can sync contacts or trigger follow-up workflows. Check the app’s settings or contact <a href='mailto:support@getlinkme.app' class='text-indigo-600 dark:text-indigo-400 hover:underline'>support@getlinkme.app</a> for a list of supported integrations."
+  },
+  {
+    question: "How does LinkMe protect my data?",
+    answer: "We take data security seriously and implement reasonable technical and organizational measures to protect your information. For details on how we collect, use, and share your data, please review our <a href='/privacy' class='text-indigo-600 dark:text-indigo-400 hover:underline'>Privacy Policy</a>. Free tier users should note that we may access data to improve the service."
+  },
+  {
+    question: "What are the micro-communities in LinkMe?",
+    answer: "Micro-communities are opt-in, exclusive groups within LinkMe based on shared goals or industries. They’re invite-only, requiring a certain number of meaningful connections to join, fostering genuine relationships without the noise of larger platforms like LinkedIn."
+  },
+  {
+    question: "How do I contact support if I have an issue?",
+    answer: "If you need help, reach out to our support team at <a href='mailto:support@getlinkme.app' class='text-indigo-600 dark:text-indigo-400 hover:underline'>support@getlinkme.app</a>. We’re here to assist with any questions about the app, billing, or features."
+  }
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <section class="py-16 md:py-24 bg-white dark:bg-gray-900">
+    <Container>
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">
+          {pageTitle}
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300 mb-12">
+          Got questions about LinkMe? We’ve got answers. Explore the FAQs below to learn more about our all-in-one networking platform for digital business cards, contact management, and professional relationship building.
+        </p>
+
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <div
+              x-data="{ open: false }"
+              class="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm transition-all duration-300"
+            >
+              <button
+                x-on:click="open = !open"
+                class="w-full text-left p-6 flex justify-between items-center focus:outline-none"
+              >
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
+                  {faq.question}
+                </h2>
+                <span
+                  x-bind:class="open ? 'rotate-180' : 'rotate-0'"
+                  class="text-indigo-600 dark:text-indigo-400 transform transition-transform duration-300"
+                >
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    ></path>
+                  </svg>
+                </span>
+              </button>
+              <div
+                x-show="open"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform -translate-y-2"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-2"
+                class="p-6 pt-0 text-gray-600 dark:text-gray-300 prose dark:prose-invert"
+              >
+                <p set:html={faq.answer} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+</Layout>

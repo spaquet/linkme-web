@@ -13,7 +13,10 @@ export async function GET() {
       '/features',            // features page
       '/pricing',             // pricing page
       '/contact',             // contact page
-      // Add other pages as needed
+      '/privacy',             // privacy policy
+      '/terms-of-service',    // terms of service
+      '/cookies',            // cookies policy
+      '/blog',               // blog index
     ];
   
     // Build the sitemap XML
