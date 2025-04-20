@@ -1,62 +1,55 @@
 ---
-    // Import the SEO component from astro-seo for better SEO handling
-    import { SEO } from "astro-seo";
-    import Header from "../components/header/Header.astro";
-    import Footer from "../components/footer/Footer.astro";
-    import '../styles/global.css';
+import { SEO } from "astro-seo";
+import Header from "../components/header/Header.astro";
+import Footer from "../components/footer/Footer.astro";
+import '../styles/global.css';
 
-    // Define the props interface for the Layout component
-    export interface Props {
-        title?: string;
-        description?: string;
-        image?: string;
-        canonicalURL?: URL | string;
-        pageType?: "website" | "article";
-        publishedTime?: string;
-        author?: string;
-        tags?: string[];
-        twitterHandle?: string; // For dynamic twitter:creator
-    }
+export interface Props {
+    title?: string;
+    description?: string;
+    image?: string;
+    canonicalURL?: URL | string;
+    pageType?: "website" | "article";
+    publishedTime?: string;
+    author?: string;
+    tags?: string[];
+    twitterHandle?: string;
+}
 
-    // Destructure the props with default values
-    const {
-        title = "LinkMe - Connect, Track & Grow Your Network",
-        description = "Make connections, track your network, extend your reach, and automate marketing tasks with LinkMe.",
-        image = "/images/social-preview.jpg",
-        canonicalURL = Astro.url,
-        pageType = "website",
-        publishedTime,
-        author = "LinkMe",
-        tags = [],
-        twitterHandle, // No default, provided by blog posts
-    } = Astro.props;
+const {
+    title = "LinkMe - Connect, Track & Grow Your Network",
+    description = "Make connections, track your network, extend your reach, and automate marketing tasks with LinkMe.",
+    image = "/images/social-preview.jpg",
+    canonicalURL = Astro.url,
+    pageType = "website",
+    publishedTime,
+    author = "LinkMe",
+    tags = [],
+    twitterHandle,
+} = Astro.props;
 
-    // Ensure absolute URL for image
-    const absoluteImage = Astro.site ? new URL(image, Astro.site).toString() : image;
+const absoluteImage = Astro.site ? new URL(image, Astro.site).toString() : image;
 
-    // Ensure canonicalURL is a string with trailing slash
-    const canonicalUrlString = canonicalURL instanceof URL ? canonicalURL.toString() : canonicalURL;
-    const normalizedCanonicalURL = canonicalUrlString.endsWith('/') ? canonicalUrlString : `${canonicalUrlString}/`;
+const canonicalUrlString = canonicalURL instanceof URL ? canonicalURL.toString() : canonicalURL;
+const normalizedCanonicalURL = canonicalUrlString.endsWith('/') ? canonicalUrlString : `${canonicalUrlString}/`;
 
-    // Map author to Twitter handle, prioritize twitterHandle from frontmatter
-    const twitterCreator = twitterHandle || (author === "Jane Doe" ? "@JaneDoe" : "@LinkMeApp");
+const twitterCreator = twitterHandle || (author === "Jane Doe" ? "@JaneDoe" : "@LinkMeApp");
 
-    // JSON-LD for BlogPosting (only for blog posts)
-    const jsonLd = pageType === "article" && publishedTime ? {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": title,
-        "description": description,
-        "author": { "@type": "Person", "name": author },
-        "datePublished": publishedTime,
-        "image": absoluteImage,
-        "publisher": {
-            "@type": "Organization",
-            "name": "LinkMe",
-            "logo": Astro.site ? new URL("/images/logo.png", Astro.site).toString() : "/images/logo.png"
-        },
-        "url": normalizedCanonicalURL
-    } : null;
+const jsonLd = pageType === "article" && publishedTime ? {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": title,
+    "description": description,
+    "author": { "@type": "Person", "name": author },
+    "datePublished": publishedTime,
+    "image": absoluteImage,
+    "publisher": {
+        "@type": "Organization",
+        "name": "LinkMe",
+        "logo": Astro.site ? new URL("/images/logo.png", Astro.site).toString() : "/images/logo.png"
+    },
+    "url": normalizedCanonicalURL
+} : null;
 ---
 
 <!DOCTYPE html>
