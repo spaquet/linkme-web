@@ -1,0 +1,27 @@
+--- // src/pages/rss.xml.astro
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const baseUrl = Astro.site?.toString() ?? 'https://getlinkme.app';
+
+Astro.response.headers.set('Content-Type', 'application/xml');
+---
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LinkMe Blog</title>
+    <link>{baseUrl}</link>
+    <description>Latest insights and updates from LinkMe</description>
+    <atom:link href="{baseUrl}/rss.xml" rel="self" type="application/rss+xml" />
+    {posts.map((post) => (
+      <item>
+        <title>{post.data.title}</title>
+        <link>{`${baseUrl}/blog/${post.slug}`}</link>
+        <description>{post.data.description}</description>
+        <pubDate>{post.data.date.toUTCString()}</pubDate>
+        <guid>{`${baseUrl}/blog/${post.slug}`}</guid>
+      </item>
+    ))}
+  </channel>
+</rss>

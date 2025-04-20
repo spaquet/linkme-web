@@ -1,0 +1,26 @@
+--- // src/pages/blog/index.astro
+import Layout from '../../layouts/Layout.astro';
+import Container from '../../components/common/Container.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).slice(0, 10); // Show first 10 posts
+posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Layout title="LinkMe Blog" description="Explore the latest insights and updates from LinkMe.">
+  <section class="py-16 md:py-24 bg-white dark:bg-gray-900">
+    <Container>
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">LinkMe Blog</h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map((post) => (
+          <a href={`/blog/${post.slug}`} class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
+            {post.data.image && <img src={post.data.image} alt={post.data.title} class="w-full h-48 object-cover rounded-lg mb-4" />}
+            <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{post.data.title}</h2>
+            <p class="text-gray-600 dark:text-gray-300">{post.data.description}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">{post.data.date.toLocaleDateString()}</p>
+          </a>
+        ))}
+      </div>
+    </Container>
+  </section>
+</Layout>
