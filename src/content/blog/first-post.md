@@ -5,7 +5,7 @@
     date: 2025-04-20
     author: "Stéphane Paquet"
     tags: ["networking", "digital business cards", "professional connections"]
-    image: "/assets/blog/first-post.jpg"
+    image: "/images/blog/first-post.jpg"
     twitterHandle: "@stpaquet" # Optional, for twitter:creator
 ---
 
