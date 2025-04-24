@@ -7,7 +7,11 @@ const title="Terms of Service"
 const description="Read the Terms of Service for using LinkMe, the all-in-one networking platform."
 ---
 
-<Layout title={title} description={description}>
+<Layout 
+  title={title} 
+  description={description}
+  canonicalURL={new URL("/terms-of-service/", Astro.site)}
+  pageType="website">
 
 <section class="py-16 md:py-24 bg-white dark:bg-gray-900">
   <Container>

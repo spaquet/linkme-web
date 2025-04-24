@@ -19,7 +19,11 @@ const teamMembers = [
 ];
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
+<Layout 
+  title={pageTitle} 
+  description={pageDescription}
+  canonicalURL={new URL("/about/", Astro.site)}
+  pageType="website">
   <section class="py-16 md:py-24 bg-white dark:bg-gray-900">
     <Container>
       <div class="max-w-4xl mx-auto text-center">

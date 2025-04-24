@@ -39,7 +39,11 @@ const features = [
 ];
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
+<Layout 
+  title={pageTitle} 
+  description={pageDescription}
+  canonicalURL={new URL("/features/", Astro.site)}
+  pageType="website">
   <section class="py-16 md:py-24 bg-white dark:bg-gray-900">
     <Container>
       <div class="text-center max-w-3xl mx-auto mb-16">

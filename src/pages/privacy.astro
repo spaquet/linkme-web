@@ -6,7 +6,11 @@ import Container from "../components/common/Container.astro";
 const title="Privacy Policy"
 const description="Learn how LinkMe collects, uses, and protects your personal information."
 ---
-<Layout title={title} description={description}>
+<Layout 
+  title={title} 
+  description={description}
+  canonicalURL={new URL("/privacy/", Astro.site)}
+  pageType="website">
 
 <section class="py-16 md:py-24 bg-white dark:bg-gray-900">
   <Container>
