@@ -1,0 +1,253 @@
+---
+// Contact sales form for business inquiries
+---
+
+<form id="contact-sales-form" class="space-y-6">
+  <!-- Contact Information Section -->
+  <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mb-6">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Contact Information</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="first-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          First Name *
+        </label>
+        <input
+          type="text"
+          id="first-name"
+          name="first-name"
+          required
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+        />
+      </div>
+      
+      <div>
+        <label for="last-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Last Name *
+        </label>
+        <input
+          type="text"
+          id="last-name"
+          name="last-name"
+          required
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+        />
+      </div>
+      
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Business Email *
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+        />
+      </div>
+      
+      <div>
+        <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Phone Number
+        </label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+        />
+      </div>
+    </div>
+  </div>
+  
+  <!-- Company Information Section -->
+  <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mb-6">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Company Information</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="company" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Company Name *
+        </label>
+        <input
+          type="text"
+          id="company"
+          name="company"
+          required
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+        />
+      </div>
+      
+      <div>
+        <label for="job-title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Job Title *
+        </label>
+        <input
+          type="text"
+          id="job-title"
+          name="job-title"
+          required
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+        />
+      </div>
+      
+      <div>
+        <label for="company-size" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Company Size *
+        </label>
+        <select
+          id="company-size"
+          name="company-size"
+          required
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+        >
+          <option value="" disabled selected>Select company size</option>
+          <option value="1-10">1-10 employees</option>
+          <option value="11-50">11-50 employees</option>
+          <option value="51-200">51-200 employees</option>
+          <option value="201-500">201-500 employees</option>
+          <option value="501-1000">501-1000 employees</option>
+          <option value="1001+">1001+ employees</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="industry" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Industry *
+        </label>
+        <select
+          id="industry"
+          name="industry"
+          required
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+        >
+          <option value="" disabled selected>Select industry</option>
+          <option value="technology">Technology</option>
+          <option value="finance">Finance</option>
+          <option value="healthcare">Healthcare</option>
+          <option value="education">Education</option>
+          <option value="manufacturing">Manufacturing</option>
+          <option value="retail">Retail</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Inquiry Details Section -->
+  <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mb-6">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Inquiry Details</h3>
+    <div class="space-y-6">
+      <div>
+        <label for="team-size" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          How many users need LinkMe? *
+        </label>
+        <select
+          id="team-size"
+          name="team-size"
+          required
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+        >
+          <option value="" disabled selected>Select number of users</option>
+          <option value="5-10">5-10 users</option>
+          <option value="11-25">11-25 users</option>
+          <option value="26-50">26-50 users</option>
+          <option value="51-100">51-100 users</option>
+          <option value="101-250">101-250 users</option>
+          <option value="251+">251+ users</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="requirements" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          What are your specific requirements? *
+        </label>
+        <textarea
+          id="requirements"
+          name="requirements"
+          rows="5"
+          required
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+          placeholder="Please describe your team's needs and how you plan to use LinkMe..."
+        ></textarea>
+      </div>
+      
+      <div>
+        <label for="timeline" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          Anticipated Timeline
+        </label>
+        <select
+          id="timeline"
+          name="timeline"
+          class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+        >
+          <option value="" disabled selected>Select timeline</option>
+          <option value="immediate">As soon as possible</option>
+          <option value="1-month">Within 1 month</option>
+          <option value="1-3-months">1-3 months</option>
+          <option value="3-6-months">3-6 months</option>
+          <option value="6-months+">6+ months</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Privacy and Submission -->
+  <div class="space-y-6">
+    <div class="flex items-start">
+      <input
+        type="checkbox"
+        id="privacy-policy"
+        name="privacy-policy"
+        required
+        class="h-4 w-4 mt-1 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+      />
+      <label for="privacy-policy" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+        I agree to the <a href="/privacy" class="text-indigo-600 dark:text-indigo-400 hover:underline">Privacy Policy</a> and consent to being contacted about LinkMe products and services. *
+      </label>
+    </div>
+    
+    <div>
+      <button
+        type="submit"
+        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300"
+      >
+        Submit Request
+      </button>
+    </div>
+  </div>
+</form>
+
+<div id="form-success" class="hidden bg-green-100 dark:bg-green-900 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-300 px-6 py-4 rounded-lg mt-6">
+  <h3 class="font-semibold text-lg mb-2">Thank you for your interest in LinkMe!</h3>
+  <p>A member of our sales team will contact you within 1-2 business days to discuss your requirements and how LinkMe can help your organization.</p>
+</div>
+
+<div id="form-error" class="hidden bg-red-100 dark:bg-red-900 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-6 py-4 rounded-lg mt-6">
+  <h3 class="font-semibold text-lg mb-2">Something went wrong</h3>
+  <p>We encountered an error while submitting your request. Please try again later or email us directly at <a href="mailto:sales@getlinkme.app" class="underline">sales@getlinkme.app</a>.</p>
+</div>
+
+<script>
+  // Form handling for sales inquiries
+  const form = document.getElementById('contact-sales-form');
+  const successMessage = document.getElementById('form-success');
+  const errorMessage = document.getElementById('form-error');
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // In a real implementation, you would send the form data to your backend
+      // For demonstration purposes, we'll just show the success message
+      
+      // Simulate form submission with a delay
+      setTimeout(() => {
+        form.classList.add('hidden');
+        successMessage.classList.remove('hidden');
+        
+        // Reset form (but don't show it again automatically)
+        form.reset();
+      }, 1000);
+    });
+  }
+</script>

@@ -1,0 +1,99 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/common/Container.astro";
+import ContactSalesForm from "../components/common/ContactSalesForm.astro";
+
+const pageTitle = "Contact Sales";
+const pageDescription = "Get in touch with the LinkMe sales team to learn about our business and enterprise plans for larger teams and organizations.";
+---
+
+<Layout 
+  title={pageTitle} 
+  description={pageDescription}
+  canonicalURL={new URL("/contact-sales/", Astro.site)}
+  pageType="website">
+  <section class="py-16 md:py-24 bg-white dark:bg-gray-900">
+    <Container>
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Enterprise Solutions
+          </h1>
+          <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Ready to transform how your team networks? Contact our sales team to learn more about LinkMe's enterprise plans, custom integrations, and team features.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg text-center">
+            <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center text-indigo-600 dark:text-indigo-400 mx-auto mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Team Management</h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              Centralized administration, user provisioning, and team-wide analytics.
+            </p>
+          </div>
+          
+          <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg text-center">
+            <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center text-indigo-600 dark:text-indigo-400 mx-auto mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Custom Branding</h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              White-label digital business cards with your company's branding and design.
+            </p>
+          </div>
+          
+          <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg text-center">
+            <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center text-indigo-600 dark:text-indigo-400 mx-auto mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">API Access</h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              Integrate LinkMe with your existing tools and workflows through our API.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-200 dark:border-gray-700">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Talk to Sales</h2>
+          <ContactSalesForm />
+        </div>
+
+        <div class="mt-16 bg-indigo-50 dark:bg-gray-800 rounded-lg p-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Looking for a demo?</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">
+                See LinkMe in action with a personalized demo for your team. Our product specialists will walk you through the platform and answer any questions.
+              </p>
+              <a 
+                href="mailto:sales@getlinkme.app?subject=LinkMe Demo Request"
+                class="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300"
+              >
+                Schedule a Demo
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
+            <div class="hidden md:block">
+              <img 
+                src="/images/demo-illustration.svg" 
+                alt="LinkMe Demo Illustration" 
+                class="w-full h-auto max-w-sm mx-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+</Layout>

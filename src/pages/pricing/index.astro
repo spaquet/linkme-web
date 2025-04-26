@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Pricing from "../../components/sections/Pricing.astro";
+
+const pageTitle = "LinkMe Pricing";
+const pageDescription = "Explore LinkMe's pricing plans designed for individuals, professionals, and businesses. Choose the plan that fits your networking needs.";
+---
+
+<Layout 
+  title={pageTitle} 
+  description={pageDescription}
+  canonicalURL={new URL("/pricing/", Astro.site)}
+  pageType="website">
+  <Pricing />
+</Layout>
