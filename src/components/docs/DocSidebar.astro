@@ -1,0 +1,87 @@
+---
+export interface Props {
+  currentSlug: string;
+}
+
+const { currentSlug } = Astro.props;
+
+// Documentation navigation structure
+const docNav = [
+  {
+    title: "Getting Started",
+    items: [
+      { title: "Introduction to LinkMe", slug: "introduction" },
+      { title: "Creating Your Account", slug: "creating-account" },
+      { title: "Setting Up Your Digital Business Card", slug: "digital-business-card" },
+    ]
+  },
+  {
+    title: "Features",
+    items: [
+      { title: "Digital Business Cards", slug: "features/digital-business-cards" },
+      { title: "Contact Management", slug: "features/contact-management" },
+      { title: "Network Intelligence", slug: "features/network-intelligence" },
+      { title: "Micro-Communities", slug: "features/micro-communities" },
+    ]
+  },
+  {
+    title: "Integrations",
+    items: [
+      { title: "Using LinkMe with Slack", slug: "integrations/slack" },
+      { title: "CRM Integrations", slug: "integrations/crm" },
+      { title: "Calendar Integrations", slug: "integrations/calendar" },
+    ]
+  },
+  {
+    title: "API Documentation",
+    items: [
+      { title: "API Overview", slug: "api/overview" },
+      { title: "Authentication", slug: "api/authentication" },
+      { title: "Endpoints Reference", slug: "api/endpoints" },
+    ]
+  }
+];
+---
+
+<aside class="w-full md:w-64 flex-shrink-0">
+  <div class="sticky top-20">
+    <div class="overflow-y-auto p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Documentation</h3>
+      
+      <nav class="space-y-6">
+        {docNav.map((section) => (
+          <div>
+            <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">{section.title}</h4>
+            <ul class="space-y-2">
+              {section.items.map((item) => (
+                <li>
+                  <a
+                    href={`/docs/${item.slug}/`}
+                    class={`block text-sm ${item.slug === currentSlug ? 
+                      'text-indigo-600 dark:text-indigo-400 font-medium' : 
+                      'text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400'}`}
+                  >
+                    {item.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </nav>
+      
+      <div class="mt-8 p-4 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg">
+        <h4 class="text-sm font-semibold text-gray-900 dark:text-white mb-2">Need Help?</h4>
+        <p class="text-xs text-gray-600 dark:text-gray-300 mb-3">
+          Can't find what you're looking for? Our support team is here to help.
+        </p>
+        <a 
+          href="/support/" 
+          class="text-xs inline-block bg-indigo-600 text-white font-medium py-1.5 px-3 rounded-lg text-center hover:bg-indigo-700"
+        >
+          Contact Support
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>

@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Container from '../../components/common/Container.astro';
+import DocSidebar from '../../components/docs/DocSidebar.astro';
+import DocSearch from '../../components/docs/DocSearch.astro';
+
+// Get the search query from the URL
+const query = Astro.url.searchParams.get('q') || '';
+
+// In a real implementation, we would search through the docs
+// For now, just show some mock results
+const mockResults = [
+  {
+    title: "Introduction to LinkMe",
+    slug: "introduction",
+    content: "Learn about LinkMe, the all-in-one networking platform that helps you build meaningful connections.",
+    category: "Getting Started"
+  },
+  {
+    title: "Digital Business Cards",
+    slug: "features/digital-business-cards",
+    content: "Create and share personalized digital business cards that showcase your professional identity.",
+    category: "Features"
+  },
+  {
+    title: "Network Intelligence",
+    slug: "features/network-intelligence",
+    content: "Our AI analyzes your connections to provide actionable insights and networking recommendations.",
+    category: "Features"
+  }
+];
+
+// Filter mock results based on the query (in a real app, this would be server-side)
+const results = query ? 
+  mockResults.filter(result => 
+    result.title.toLowerCase().includes(query.toLowerCase()) || 
+    result.content.toLowerCase().includes(query.toLowerCase()) ||
+    result.category.toLowerCase().includes(query.toLowerCase())
+  ) : 
+  [];
+---
+
+<Layout
+  title={`Search Results for "${query}" | LinkMe Documentation`}
+  description={`Search results for "${query}" in the LinkMe documentation.`}
+  canonicalURL={new URL(`/docs/search?q=${query}`, Astro.site)}
+  pageType="website">
+  
+  <section class="py-16 md:py-24 bg-white dark:bg-gray-900">
+    <Container>
+      <div class="flex flex-col md:flex-row gap-8">
+        <!-- Sidebar Navigation -->
+        <DocSidebar currentSlug="" />
+        
+        <!-- Main Content -->
+        <div class="flex-1">
+          <DocSearch />
+          
+          <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              {query ? `Search Results for "${query}"` : 'Search Documentation'}
+            </h1>
+            
+            {query && (
+              <p class="text-gray-600 dark:text-gray-300">
+                Found {results.length} result{results.length !== 1 ? 's' : ''} for your search.
+              </p>
+            )}
+          </div>
+          
+          {!query ? (
+            <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-lg text-center">
+              <p class="text-gray-600 dark:text-gray-300">
+                Enter a search term in the search box above to find documentation.
+              </p>
+            </div>
+          ) : results.length === 0 ? (
+            <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-lg">
+              <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">No results found</h2>
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                We couldn't find any documentation matching your search for "{query}".
+              </p>
+              <div class="space-y-4">
+                <p class="text-gray-600 dark:text-gray-300">Try:</p>
+                <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+                  <li>Checking your spelling</li>
+                  <li>Using more general keywords</li>
+                  <li>Trying related terms</li>
+                </ul>
+              </div>
+            </div>
+          ) : (
+            <div class="space-y-6">
+              {results.map((result) => (
+                <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg hover:shadow-md transition-shadow">
+                  <div class="text-sm text-indigo-600 dark:text-indigo-400 mb-1">{result.category}</div>
+                  <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    <a href={`/docs/${result.slug}/`} class="hover:underline">
+                      {result.title}
+                    </a>
+                  </h2>
+                  <p class="text-gray-600 dark:text-gray-300">{result.content}</p>
+                  <div class="mt-4">
+                    <a 
+                      href={`/docs/${result.slug}/`}
+                      class="text-sm text-indigo-600 dark:text-indigo-400 hover:underline flex items-center"
+                    >
+                      Read documentation
+                      <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </Container>
+  </section>
+</Layout>

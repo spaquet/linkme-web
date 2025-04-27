@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Container from '../../components/common/Container.astro';
+import DocSearch from '../../components/docs/DocSearch.astro';
+import { getCollection } from 'astro:content';
+
+// In future, docs will come from the content collection
+// const docs = (await getCollection('docs')).slice(0, 10);
+// docs.sort((a, b) => a.data.order - b.data.order);
+
+// Temporary static list until we implement the docs collection
+const docCategories = [
+  {
+    title: "Getting Started",
+    docs: [
+      { title: "Introduction to LinkMe", slug: "introduction" },
+      { title: "Creating Your Account", slug: "creating-account" },
+      { title: "Setting Up Your Digital Business Card", slug: "digital-business-card" },
+    ]
+  },
+  {
+    title: "Features",
+    docs: [
+      { title: "Digital Business Cards", slug: "features/digital-business-cards" },
+      { title: "Contact Management", slug: "features/contact-management" },
+      { title: "Network Intelligence", slug: "features/network-intelligence" },
+      { title: "Micro-Communities", slug: "features/micro-communities" },
+    ]
+  },
+  {
+    title: "Integrations",
+    docs: [
+      { title: "Using LinkMe with Slack", slug: "integrations/slack" },
+      { title: "CRM Integrations", slug: "integrations/crm" },
+      { title: "Calendar Integrations", slug: "integrations/calendar" },
+    ]
+  },
+  {
+    title: "API Documentation",
+    docs: [
+      { title: "API Overview", slug: "api/overview" },
+      { title: "Authentication", slug: "api/authentication" },
+      { title: "Endpoints Reference", slug: "api/endpoints" },
+    ]
+  }
+];
+
+export const revalidate = 3600;
+---
+
+<Layout
+  title="LinkMe Documentation"
+  description="Comprehensive guides and documentation for using LinkMe, the all-in-one networking platform."
+  image="/images/social-preview.jpg"
+  canonicalURL={new URL("/docs/", Astro.site)}
+  pageType="website"
+  publishedTime={undefined}
+  author="LinkMe"
+  tags={[]}>
+
+  <section class="py-16 md:py-24 bg-white dark:bg-gray-900">
+    <Container>
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          LinkMe Documentation
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+          Welcome to the LinkMe documentation. Here you'll find comprehensive guides and resources to help you get the most out of LinkMe.
+        </p>
+        
+        <DocSearch />
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          {docCategories.map((category) => (
+            <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-sm">
+              <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{category.title}</h2>
+              <ul class="space-y-2">
+                {category.docs.map((doc) => (
+                  <li>
+                    <a 
+                      href={`/docs/${doc.slug}/`} 
+                      class="text-indigo-600 dark:text-indigo-400 hover:underline"
+                    >
+                      {doc.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        
+        <div class="bg-indigo-50 dark:bg-indigo-900/30 p-6 rounded-lg">
+          <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Need Help?</h2>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">
+            Can't find what you're looking for? We're here to help. Contact our support team or check out our FAQ.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a 
+              href="/faq/" 
+              class="inline-block bg-white dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 font-medium py-2 px-4 rounded-lg text-center hover:bg-gray-50 dark:hover:bg-gray-700"
+            >
+              View FAQ
+            </a>
+            <a 
+              href="/support/" 
+              class="inline-block bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg text-center hover:bg-indigo-700"
+            >
+              Contact Support
+            </a>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+</Layout>

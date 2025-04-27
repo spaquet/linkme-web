@@ -14,6 +14,19 @@ const blogCollection = defineCollection({
   }),
 });
 
+const docsCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    order: z.number(), // For controlling the order in navigation
+    category: z.string(), // For grouping docs by category
+    tags: z.array(z.string()).optional(),
+    lastUpdated: z.date(),
+  }),
+});
+
 export const collections = {
   blog: blogCollection,
+  docs: docsCollection,
 };
