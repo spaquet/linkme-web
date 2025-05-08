@@ -60,4 +60,4 @@ Our mission is to make networking **seamless**, **authentic**, and **impactful**
 
 Ready to leave LinkedIn’s frustrations behind? With LinkMe, you can start building meaningful connections today. Create your digital business card, join a micro-community, and take control of your professional network.
 
-[Get Started with LinkMe Now](https://getlinkme.io/signup)
+[Get Started with LinkMe Now](https://getlinkme.io/signup/)
