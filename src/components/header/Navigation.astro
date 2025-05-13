@@ -35,21 +35,7 @@ const { isMobile = false } = Astro.props;
           <span class="absolute bottom-[-4px] left-0 w-0 h-0.5 bg-indigo-300 transition-all duration-200 group-hover:w-full"></span>
         )}
         
-        {/* Mobile icon (optional - you can add icons here) */}
-        {isMobile && (
-          <span class="flex items-center">
-            <span class="opacity-70 text-indigo-300 mr-3">
-              {item.text === "Features" && "✨"}
-              {item.text === "Pricing" && "💰"}
-              {item.text === "About" && "👥"}
-              {item.text === "Support" && "💬"}
-            </span>
-            {item.text}
-          </span>
-        )}
-        
-        {/* Desktop text */}
-        {!isMobile && item.text}
+        {item.text}
       </a>
     ))
   }
