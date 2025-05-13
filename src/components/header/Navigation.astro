@@ -1,4 +1,5 @@
 ---
+// src/components/header/Navigation.astro
 // Define the props
 export interface Props {
   isMobile?: boolean;
@@ -15,21 +16,68 @@ const navItems = [
 const { isMobile = false } = Astro.props;
 ---
 
-<nav class={isMobile ? "flex flex-col space-y-2" : "flex items-center space-x-8"}>
+<nav class={isMobile ? "flex flex-col space-y-1" : "flex items-center space-x-8"}>
   {
-    navItems.map((item) => (
+    navItems.map((item, index) => (
       <a
         href={item.href}
         class={`
-          font-medium transition-colors duration-200
-          ${isMobile 
-            ? "block py-2 text-white hover:text-indigo-300" 
-            : "text-sm text-white hover:text-indigo-300"
+          font-medium transition-all duration-200 group relative
+          ${isMobile
+            ? "block py-3 px-4 text-white hover:text-indigo-300 hover:bg-gray-800/30 rounded-lg transform hover:translate-x-2"
+            : "text-sm text-white hover:text-indigo-300 relative"
           }
         `}
+        style={isMobile ? `animation-delay: ${index * 50}ms` : ''}
       >
-        {item.text}
+        {/* Desktop underline effect */}
+        {!isMobile && (
+          <span class="absolute bottom-[-4px] left-0 w-0 h-0.5 bg-indigo-300 transition-all duration-200 group-hover:w-full"></span>
+        )}
+        
+        {/* Mobile icon (optional - you can add icons here) */}
+        {isMobile && (
+          <span class="flex items-center">
+            <span class="opacity-70 text-indigo-300 mr-3">
+              {item.text === "Features" && "✨"}
+              {item.text === "Pricing" && "💰"}
+              {item.text === "About" && "👥"}
+              {item.text === "Support" && "💬"}
+            </span>
+            {item.text}
+          </span>
+        )}
+        
+        {/* Desktop text */}
+        {!isMobile && item.text}
       </a>
     ))
   }
 </nav>
+
+{/* Mobile menu animation styles */}
+{isMobile && (
+  <style>
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    /* Add staggered animation to mobile nav items */
+    nav a {
+      animation: slideInLeft 0.3s ease-out forwards;
+      opacity: 0;
+    }
+    
+    nav a:nth-child(1) { animation-delay: 0.1s; }
+    nav a:nth-child(2) { animation-delay: 0.2s; }
+    nav a:nth-child(3) { animation-delay: 0.3s; }
+    nav a:nth-child(4) { animation-delay: 0.4s; }
+  </style>
+)}
