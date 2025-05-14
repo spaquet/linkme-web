@@ -16,19 +16,16 @@ const navItems = [
 const { isMobile = false } = Astro.props;
 ---
 
-<nav class={isMobile ? "flex flex-col space-y-1" : "flex items-center space-x-8"}>
+<nav class={isMobile ? "flex flex-col items-center gap-8" : "flex items-center space-x-8"}>
   {
-    navItems.map((item, index) => (
+    navItems.map((item) => (
       <a
         href={item.href}
-        class={`
-          font-medium transition-all duration-200 group relative
-          ${isMobile
-            ? "block py-3 px-4 text-white hover:text-indigo-300 hover:bg-gray-800/30 rounded-lg transform hover:translate-x-2"
-            : "text-sm text-white hover:text-indigo-300 relative"
-          }
-        `}
-        style={isMobile ? `animation-delay: ${index * 50}ms` : ''}
+        class={
+          isMobile
+            ? "text-xl font-medium text-white hover:text-indigo-300 transition-colors duration-200"
+            : "text-sm font-medium text-white hover:text-indigo-300 transition-all duration-200 relative group"
+        }
       >
         {/* Desktop underline effect */}
         {!isMobile && (
@@ -40,30 +37,3 @@ const { isMobile = false } = Astro.props;
     ))
   }
 </nav>
-
-{/* Mobile menu animation styles */}
-{isMobile && (
-  <style>
-    @keyframes slideInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    /* Add staggered animation to mobile nav items */
-    nav a {
-      animation: slideInLeft 0.3s ease-out forwards;
-      opacity: 0;
-    }
-    
-    nav a:nth-child(1) { animation-delay: 0.1s; }
-    nav a:nth-child(2) { animation-delay: 0.2s; }
-    nav a:nth-child(3) { animation-delay: 0.3s; }
-    nav a:nth-child(4) { animation-delay: 0.4s; }
-  </style>
-)}

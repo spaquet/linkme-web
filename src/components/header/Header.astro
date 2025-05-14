@@ -34,230 +34,104 @@ import Button from "../common/Button.astro";
       <div class="flex md:hidden">
         <button
           type="button"
-          id="menu-toggle"
-          class="text-white hover:text-indigo-300 focus:outline-none p-2 -m-2 touch-manipulation transition-colors duration-200"
+          id="mobile-menu-button"
+          class="text-white hover:text-indigo-300 focus:outline-none p-2 -m-2 transition-colors duration-200"
           aria-label="Toggle navigation menu"
           style="min-height: 44px; min-width: 44px;"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+          <i class="fas fa-bars text-xl"></i>
         </button>
-      </div>
-    </div>
-    
-    <!-- Mobile Navigation (Fixed positioning and transform) -->
-    <div 
-      id="mobile-menu" 
-      class="fixed left-0 right-0 bg-[#1E1E1E] md:hidden transition-all duration-300 ease-in-out border-b border-gray-800 shadow-2xl mobile-menu-hidden"
-      style="top: 100%;"
-    >
-      <div class="px-6 py-6 bg-gradient-to-b from-[#1E1E1E] to-[#141414]">
-        <!-- Navigation Links with beautiful styling -->
-        <nav class="space-y-1">
-          <Navigation isMobile={true} />
-        </nav>
-        
-        <!-- Divider -->
-        <div class="my-6 border-t border-gray-700/50"></div>
-        
-        <!-- CTA Buttons for mobile -->
-        <div class="space-y-3">
-          <a 
-            href="https://getlinkme.io/" 
-            class="block w-full text-center py-3 px-4 text-white hover:text-indigo-300 font-medium transition-all duration-200 hover:bg-gray-800/50 rounded-lg"
-          >
-            Sign In
-          </a>
-          <a 
-            href="https://getlinkme.io/signup/" 
-            class="block w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
-          >
-            Get Started
-          </a>
-        </div>
       </div>
     </div>
   </Container>
   
-  <!-- Mobile menu backdrop -->
+  <!-- Mobile Navigation (Full screen overlay) -->
   <div 
-    id="mobile-backdrop" 
-    class="fixed inset-0 bg-black/50 backdrop-blur-sm md:hidden opacity-0 transition-opacity duration-300 pointer-events-none z-30"
-  ></div>
+    id="mobile-menu" 
+    class="fixed inset-0 bg-[#1E1E1E] z-50 flex-col items-center justify-center hidden md:hidden"
+  >
+    <!-- Close button -->
+    <div class="absolute top-6 right-6">
+      <button 
+        id="close-menu-button" 
+        class="text-white hover:text-indigo-300 focus:outline-none p-2"
+        aria-label="Close navigation menu"
+      >
+        <i class="fas fa-times text-2xl"></i>
+      </button>
+    </div>
+    
+    <!-- Navigation content -->
+    <div class="flex flex-col items-center gap-8 text-xl">
+      <Navigation isMobile={true} />
+      
+      <!-- Mobile CTA buttons -->
+      <div class="flex flex-col items-center gap-4 mt-8">
+        <a 
+          href="https://getlinkme.io/" 
+          class="text-lg font-medium text-white hover:text-indigo-300 transition-colors duration-200"
+        >
+          Sign In
+        </a>
+        <a 
+          href="https://getlinkme.io/signup/" 
+          class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+        >
+          Get Started
+        </a>
+      </div>
+    </div>
+  </div>
 </header>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const closeMenuButton = document.getElementById('close-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
-  const mobileBackdrop = document.getElementById('mobile-backdrop');
   
-  if (menuToggle && mobileMenu && mobileBackdrop) {
-    let isToggling = false;
-    let isMenuOpen = false;
-    
-    // Get the header height dynamically
-    const getHeaderHeight = () => {
-      const header = document.querySelector('header');
-      return header ? header.offsetHeight : 0;
-    };
-    
-    const toggleMenu = (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+  if (mobileMenuButton && closeMenuButton && mobileMenu) {
+    // Open mobile menu
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+      mobileMenu.classList.add('flex');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
       
-      if (isToggling) return;
-      isToggling = true;
-      
-      // Update menu position based on current header height
-      const headerHeight = getHeaderHeight();
-      mobileMenu.style.top = `${headerHeight}px`;
-      
-      if (isMenuOpen) {
-        // Close menu
-        mobileMenu.classList.add('mobile-menu-hidden');
-        mobileMenu.classList.remove('mobile-menu-visible');
-        
-        mobileBackdrop.style.opacity = '0';
-        mobileBackdrop.style.pointerEvents = 'none';
-        
-        // Allow body scroll
-        document.body.classList.remove('menu-open');
-        
-        // Reset hamburger icon
-        const svg = menuToggle.querySelector('svg');
-        if (svg) {
-          svg.style.transform = 'rotate(0deg)';
-          const path = svg.querySelector('path');
-          if (path) {
-            path.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-          }
-        }
-        
-        isMenuOpen = false;
-      } else {
-        // Open menu
-        mobileMenu.classList.remove('mobile-menu-hidden');
-        mobileMenu.classList.add('mobile-menu-visible');
-        
-        mobileBackdrop.style.opacity = '1';
-        mobileBackdrop.style.pointerEvents = 'auto';
-        
-        // Prevent body scroll
-        document.body.classList.add('menu-open');
-        
-        // Change to X icon
-        const svg = menuToggle.querySelector('svg');
-        if (svg) {
-          svg.style.transform = 'rotate(90deg)';
-          const path = svg.querySelector('path');
-          if (path) {
-            path.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-          }
-        }
-        
-        isMenuOpen = true;
-      }
-      
-      setTimeout(() => {
-        isToggling = false;
-      }, 300);
-    };
-    
-    // Event listeners
-    menuToggle.addEventListener('click', toggleMenu);
-    
-    // Close menu when clicking backdrop
-    mobileBackdrop.addEventListener('click', () => {
-      if (isMenuOpen) {
-        toggleMenu({ preventDefault: () => {}, stopPropagation: () => {} });
+      // Change icon to X
+      const icon = mobileMenuButton.querySelector('i');
+      if (icon) {
+        icon.className = 'fas fa-times text-xl';
       }
     });
     
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (event) => {
-      if (!menuToggle.contains(event.target) && 
-          !mobileMenu.contains(event.target) && 
-          isMenuOpen) {
-        toggleMenu({ preventDefault: () => {}, stopPropagation: () => {} });
+    // Close mobile menu
+    const closeMenu = () => {
+      mobileMenu.classList.remove('flex');
+      mobileMenu.classList.add('hidden');
+      document.body.style.overflow = ''; // Restore scrolling
+      
+      // Change icon back to hamburger
+      const icon = mobileMenuButton.querySelector('i');
+      if (icon) {
+        icon.className = 'fas fa-bars text-xl';
+      }
+    };
+    
+    closeMenuButton.addEventListener('click', closeMenu);
+    
+    // Close menu when clicking outside content (optional)
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) {
+        closeMenu();
       }
     });
     
     // Close menu on escape key
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isMenuOpen) {
-        toggleMenu({ preventDefault: () => {}, stopPropagation: () => {} });
+      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+        closeMenu();
       }
-    });
-    
-    // Handle resize and orientation change
-    const handleResize = () => {
-      if (isMenuOpen) {
-        const headerHeight = getHeaderHeight();
-        mobileMenu.style.top = `${headerHeight}px`;
-      }
-    };
-    
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('orientationchange', () => {
-      setTimeout(handleResize, 100);
     });
   }
 });
 </script>
-
-<style>
-/* Mobile menu states */
-.mobile-menu-hidden {
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 35;
-}
-
-.mobile-menu-visible {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
-  z-index: 35;
-}
-
-/* Prevent body scroll when menu is open */
-body.menu-open {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-}
-
-/* Improve mobile touch interactions */
-.touch-manipulation {
-  touch-action: manipulation;
-}
-
-/* Custom animation for hamburger */
-svg {
-  transition: transform 0.2s ease-in-out;
-}
-
-/* Ensure mobile menu appears above other content */
-#mobile-menu {
-  z-index: 35;
-}
-
-#mobile-backdrop {
-  z-index: 30;
-}
-
-/* Safari specific fixes */
-@supports (-webkit-overflow-scrolling: touch) {
-  .mobile-menu-hidden {
-    transform: translate3d(0, -100%, 0);
-  }
-  
-  .mobile-menu-visible {
-    transform: translate3d(0, 0, 0);
-  }
-}
-</style>
