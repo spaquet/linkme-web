@@ -29,23 +29,23 @@ import Button from "../common/Button.astro";
           Get Started
         </Button>
       </div>
-      
-      <!-- Mobile Menu Button -->
-      <div class="flex md:hidden">
-        <button
-          type="button"
-          id="mobile-menu-button"
-          class="text-white hover:text-indigo-300 focus:outline-none p-2 -m-2 transition-colors duration-200"
-          aria-label="Toggle navigation menu"
-          style="min-height: 44px; min-width: 44px;"
-        >
-          <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
     </div>
   </Container>
+  
+  <!-- Mobile Menu Button - Outside Container for better touch -->
+  <div class="flex md:hidden absolute top-4 right-4 z-50">
+    <button
+      type="button"
+      id="mobile-menu-button"
+      class="text-white hover:text-indigo-300 focus:outline-none p-3 bg-[#1E1E1E] rounded-lg transition-colors duration-200"
+      aria-label="Toggle navigation menu"
+      style="min-height: 44px; min-width: 44px; touch-action: manipulation;"
+    >
+      <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
   
   <!-- Mobile Navigation (Full screen overlay) -->
   <div 
