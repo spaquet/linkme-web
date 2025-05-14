@@ -7,7 +7,7 @@ import Button from "../common/Button.astro";
 
 <header class="w-full py-4 border-b border-gray-800 bg-[#1E1E1E] fixed top-0 z-40">
   <Container>
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between h-8">
       <!-- Logo only, no text next to it -->
       <div class="flex items-center">
         <a href="/" class="flex items-center">
@@ -29,23 +29,23 @@ import Button from "../common/Button.astro";
           Get Started
         </Button>
       </div>
+      
+      <!-- Mobile Menu Button - Properly centered and with better touch handling -->
+      <div class="flex md:hidden items-center justify-center">
+        <button
+          type="button"
+          id="mobile-menu-button"
+          class="flex items-center justify-center text-white hover:text-indigo-300 focus:outline-none transition-colors duration-200 active:scale-95"
+          aria-label="Toggle navigation menu"
+          style="width: 44px; height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent;"
+        >
+          <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
     </div>
   </Container>
-  
-  <!-- Mobile Menu Button - Outside Container for better touch -->
-  <div class="flex md:hidden absolute top-4 right-4 z-50">
-    <button
-      type="button"
-      id="mobile-menu-button"
-      class="text-white hover:text-indigo-300 focus:outline-none p-3 bg-[#1E1E1E] rounded-lg transition-colors duration-200"
-      aria-label="Toggle navigation menu"
-      style="min-height: 44px; min-width: 44px; touch-action: manipulation;"
-    >
-      <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
-  </div>
   
   <!-- Mobile Navigation (Full screen overlay) -->
   <div 
@@ -56,11 +56,12 @@ import Button from "../common/Button.astro";
     <div class="absolute top-6 right-6">
       <button 
         id="close-menu-button" 
-        class="text-white hover:text-indigo-300 focus:outline-none p-2"
+        class="flex items-center justify-center text-white hover:text-indigo-300 focus:outline-none transition-colors duration-200 active:scale-95"
         aria-label="Close navigation menu"
+        style="width: 48px; height: 48px; touch-action: manipulation; -webkit-tap-highlight-color: transparent;"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
@@ -95,38 +96,66 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileMenu = document.getElementById('mobile-menu');
   
   if (mobileMenuButton && closeMenuButton && mobileMenu) {
+    // Check if device supports touch
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
     // Open mobile menu
-    mobileMenuButton.addEventListener('click', () => {
+    const openMenu = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
       mobileMenu.classList.remove('hidden');
       mobileMenu.classList.add('flex');
-      document.body.style.overflow = 'hidden'; // Prevent scrolling
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
       
       // Change icon to X
-      const icon = mobileMenuButton.querySelector('svg');
+      const icon = mobileMenuButton.querySelector('svg path');
       if (icon) {
-        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
-      }
-    });
-    
-    // Close mobile menu
-    const closeMenu = () => {
-      mobileMenu.classList.remove('flex');
-      mobileMenu.classList.add('hidden');
-      document.body.style.overflow = ''; // Restore scrolling
-      
-      // Change icon back to hamburger
-      const icon = mobileMenuButton.querySelector('svg');
-      if (icon) {
-        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+        icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
       }
     };
     
-    closeMenuButton.addEventListener('click', closeMenu);
+    // Close mobile menu
+    const closeMenu = (e) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      
+      mobileMenu.classList.remove('flex');
+      mobileMenu.classList.add('hidden');
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      
+      // Change icon back to hamburger
+      const icon = mobileMenuButton.querySelector('svg path');
+      if (icon) {
+        icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+      }
+    };
     
-    // Close menu when clicking outside content (optional)
+    // Add appropriate event listeners based on device type
+    if (isTouchDevice) {
+      // Use touchstart for touch devices
+      mobileMenuButton.addEventListener('touchstart', openMenu, { passive: false });
+      closeMenuButton.addEventListener('touchstart', closeMenu, { passive: false });
+      
+      // Also add click as fallback
+      mobileMenuButton.addEventListener('click', openMenu);
+      closeMenuButton.addEventListener('click', closeMenu);
+    } else {
+      // Use click for non-touch devices
+      mobileMenuButton.addEventListener('click', openMenu);
+      closeMenuButton.addEventListener('click', closeMenu);
+    }
+    
+    // Close menu when clicking outside content
     mobileMenu.addEventListener('click', (e) => {
       if (e.target === mobileMenu) {
-        closeMenu();
+        closeMenu(e);
       }
     });
     
@@ -136,6 +165,28 @@ document.addEventListener('DOMContentLoaded', () => {
         closeMenu();
       }
     });
+    
+    // Prevent double-tap zoom on buttons
+    [mobileMenuButton, closeMenuButton].forEach(button => {
+      button.addEventListener('touchend', (e) => {
+        e.preventDefault();
+      });
+    });
   }
 });
 </script>
+
+<style>
+/* Ensure buttons are properly styled for touch */
+button {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Remove tap highlights on webkit browsers */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+</style>
