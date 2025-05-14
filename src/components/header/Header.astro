@@ -39,7 +39,9 @@ import Button from "../common/Button.astro";
           aria-label="Toggle navigation menu"
           style="min-height: 44px; min-width: 44px;"
         >
-          <i class="fas fa-bars text-xl"></i>
+          <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
         </button>
       </div>
     </div>
@@ -57,7 +59,9 @@ import Button from "../common/Button.astro";
         class="text-white hover:text-indigo-300 focus:outline-none p-2"
         aria-label="Close navigation menu"
       >
-        <i class="fas fa-times text-2xl"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
       </button>
     </div>
     
@@ -98,9 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = 'hidden'; // Prevent scrolling
       
       // Change icon to X
-      const icon = mobileMenuButton.querySelector('i');
+      const icon = mobileMenuButton.querySelector('svg');
       if (icon) {
-        icon.className = 'fas fa-times text-xl';
+        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
       }
     });
     
@@ -111,9 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = ''; // Restore scrolling
       
       // Change icon back to hamburger
-      const icon = mobileMenuButton.querySelector('i');
+      const icon = mobileMenuButton.querySelector('svg');
       if (icon) {
-        icon.className = 'fas fa-bars text-xl';
+        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
       }
     };
     
