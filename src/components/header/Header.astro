@@ -46,11 +46,11 @@ import Button from "../common/Button.astro";
       </div>
     </div>
     
-    <!-- Mobile Navigation (Beautiful overlay style) -->
+    <!-- Mobile Navigation (Fixed positioning and transform) -->
     <div 
       id="mobile-menu" 
-      class="absolute left-0 right-0 top-full bg-[#1E1E1E] md:hidden transform transition-all duration-300 ease-in-out translate-y-[-100%] opacity-0 z-30 border-b border-gray-800 shadow-2xl"
-      style="visibility: hidden;"
+      class="fixed left-0 right-0 bg-[#1E1E1E] md:hidden transition-all duration-300 ease-in-out border-b border-gray-800 shadow-2xl mobile-menu-hidden"
+      style="top: 100%;"
     >
       <div class="px-6 py-6 bg-gradient-to-b from-[#1E1E1E] to-[#141414]">
         <!-- Navigation Links with beautiful styling -->
@@ -83,8 +83,7 @@ import Button from "../common/Button.astro";
   <!-- Mobile menu backdrop -->
   <div 
     id="mobile-backdrop" 
-    class="fixed inset-0 bg-black/50 backdrop-blur-sm md:hidden opacity-0 z-20"
-    style="visibility: hidden; pointer-events: none;"
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm md:hidden opacity-0 transition-opacity duration-300 pointer-events-none z-30"
   ></div>
 </header>
 
@@ -98,6 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let isToggling = false;
     let isMenuOpen = false;
     
+    // Get the header height dynamically
+    const getHeaderHeight = () => {
+      const header = document.querySelector('header');
+      return header ? header.offsetHeight : 0;
+    };
+    
     const toggleMenu = (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -105,22 +110,20 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isToggling) return;
       isToggling = true;
       
-      // Force a repaint to ensure Safari recognizes the changes
-      mobileMenu.offsetHeight;
+      // Update menu position based on current header height
+      const headerHeight = getHeaderHeight();
+      mobileMenu.style.top = `${headerHeight}px`;
       
       if (isMenuOpen) {
         // Close menu
-        mobileMenu.style.visibility = 'hidden';
-        mobileMenu.style.transform = 'translateY(-100%)';
-        mobileMenu.style.opacity = '0';
+        mobileMenu.classList.add('mobile-menu-hidden');
+        mobileMenu.classList.remove('mobile-menu-visible');
         
-        mobileBackdrop.style.visibility = 'hidden';
         mobileBackdrop.style.opacity = '0';
         mobileBackdrop.style.pointerEvents = 'none';
         
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.width = '';
+        // Allow body scroll
+        document.body.classList.remove('menu-open');
         
         // Reset hamburger icon
         const svg = menuToggle.querySelector('svg');
@@ -135,18 +138,14 @@ document.addEventListener('DOMContentLoaded', () => {
         isMenuOpen = false;
       } else {
         // Open menu
-        mobileMenu.style.visibility = 'visible';
-        mobileMenu.style.transform = 'translateY(0)';
-        mobileMenu.style.opacity = '1';
+        mobileMenu.classList.remove('mobile-menu-hidden');
+        mobileMenu.classList.add('mobile-menu-visible');
         
-        mobileBackdrop.style.visibility = 'visible';
         mobileBackdrop.style.opacity = '1';
         mobileBackdrop.style.pointerEvents = 'auto';
         
-        // Prevent body scroll on Safari
-        document.body.style.overflow = 'hidden';
-        document.body.style.position = 'fixed';
-        document.body.style.width = '100%';
+        // Prevent body scroll
+        document.body.classList.add('menu-open');
         
         // Change to X icon
         const svg = menuToggle.querySelector('svg');
@@ -163,17 +162,11 @@ document.addEventListener('DOMContentLoaded', () => {
       
       setTimeout(() => {
         isToggling = false;
-      }, 100);
+      }, 300);
     };
     
-    // Use touchstart for better Safari performance, fallback to click
-    const isTouchDevice = 'ontouchstart' in window;
-    
-    if (isTouchDevice) {
-      menuToggle.addEventListener('touchstart', toggleMenu, { passive: false });
-    } else {
-      menuToggle.addEventListener('click', toggleMenu);
-    }
+    // Event listeners
+    menuToggle.addEventListener('click', toggleMenu);
     
     // Close menu when clicking backdrop
     mobileBackdrop.addEventListener('click', () => {
@@ -181,16 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleMenu({ preventDefault: () => {}, stopPropagation: () => {} });
       }
     });
-    
-    // Also handle touchstart on backdrop for touch devices
-    if (isTouchDevice) {
-      mobileBackdrop.addEventListener('touchstart', (e) => {
-        if (isMenuOpen) {
-          e.preventDefault();
-          toggleMenu({ preventDefault: () => {}, stopPropagation: () => {} });
-        }
-      }, { passive: false });
-    }
     
     // Close mobile menu when clicking outside
     document.addEventListener('click', (event) => {
@@ -208,20 +191,46 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     
-    // Handle orientation change on mobile Safari
-    window.addEventListener('orientationchange', () => {
+    // Handle resize and orientation change
+    const handleResize = () => {
       if (isMenuOpen) {
-        setTimeout(() => {
-          // Force a recalculation after orientation change
-          mobileMenu.style.transform = 'translateY(0)';
-        }, 100);
+        const headerHeight = getHeaderHeight();
+        mobileMenu.style.top = `${headerHeight}px`;
       }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(handleResize, 100);
     });
   }
 });
 </script>
 
 <style>
+/* Mobile menu states */
+.mobile-menu-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 35;
+}
+
+.mobile-menu-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 35;
+}
+
+/* Prevent body scroll when menu is open */
+body.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
 /* Improve mobile touch interactions */
 .touch-manipulation {
   touch-action: manipulation;
@@ -232,10 +241,23 @@ svg {
   transition: transform 0.2s ease-in-out;
 }
 
-/* Prevent body scroll when menu is open */
-body.overflow-hidden {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
+/* Ensure mobile menu appears above other content */
+#mobile-menu {
+  z-index: 35;
+}
+
+#mobile-backdrop {
+  z-index: 30;
+}
+
+/* Safari specific fixes */
+@supports (-webkit-overflow-scrolling: touch) {
+  .mobile-menu-hidden {
+    transform: translate3d(0, -100%, 0);
+  }
+  
+  .mobile-menu-visible {
+    transform: translate3d(0, 0, 0);
+  }
 }
 </style>
